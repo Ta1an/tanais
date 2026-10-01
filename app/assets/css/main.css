@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+:root {
+  --bg-dark: var(--color-slate-950);
+  --bg: var(--color-slate-900);
+  --bg-light: var(--color-slate-700);
+  --text: hsl(0, 0%, 95%);
+  --text-muted: hsl(0, 0%, 80%);
+  --primary: var(--color-cyan-500);
+  --border: var(--color-neutral-300);
+  --gradient: linear-gradient(
+    to right,
+    var(--primary) 0%,
+    var(--color-sky-500) 25%,
+    var(--color-blue-500) 60%,
+    var(--color-violet-500) 100%
+  );
+
+  --s-s: 0px 2px 4px hsla(0, 0%, 0%, 0.4);
+  --s-m: 0px 4px 8px hsla(0, 0%, 0%, 0.4);
+  --s-l: 0px 6px 10px hsla(0, 0%, 0%, 0.4);
+}
+
+@theme {
+  --color-bg-dark: var(--bg-dark);
+  --color-bg: var(--bg);
+  --color-bg-light: var(--bg-light);
+  --color-gradient: var(--gradient);
+  --color-primary: var(--primary);
+  --color-border: var(--border);
+
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+
+  --shadow-s: var(--s-s);
+  --shadow-m: var(--s-m);
+  --shadow-l: var(--s-l);
+
+  --glow-s: 0 10px 28px rgb(99 102 241 / 0.3), 0 0 16px rgb(34 211 238 / 0.18);
+
+  --glow-m: 0 16px 42px rgb(99 102 241 / 0.32), 0 0 28px rgb(34 211 238 / 0.2);
+
+  --glow-l: 0 24px 64px rgb(99 102 241 / 0.36), 0 0 44px rgb(34 211 238 / 0.24);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--bg-dark);
+    font-family: "Inter", sans-serif;
+    color: var(--text);
+  }
+
+  h1 {
+    font-weight: 600;
+    font-family: "M PLUS 1p";
+    font-size: clamp(2.25rem, 4vw, 4rem);
+    line-height: 1.25;
+  }
+  h2 {
+    font-weight: 500;
+    font-family: "M PLUS 1p";
+    font-size: clamp(2em, 3.2vw, 3.5rem);
+    line-height: 1.25;
+  }
+
+  h3 {
+    font-weight: 500;
+    font-family: "M PLUS 1p";
+    font-size: clamp(1.4rem, 2vw, 2rem);
+  }
+  h4 {
+    font-weight: 400;
+    font-size: clamp(1.175rem, 1.2vw, 1.25rem);
+  }
+  p {
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.2vw, 1.25rem);
+  }
+}
+
+@layer components {
+  .section {
+    @apply p-10 md:px-[10%] md:py-[4%] scroll-mt-28;
+  }
+
+  .top-section {
+    @apply lg:pt-40 pt-32;
+  }
+
+  .button {
+    @apply inline-flex items-center justify-center gap-1 px-7 py-4 rounded-full font-medium text-lg;
+  }
+
+  .button-primary {
+    @apply relative bg-(image:--color-gradient) shadow-(--glow-s) hover:shadow-(--glow-m) hover:-translate-y-1 transition-all duration-300;
+  }
+
+  .button-outline {
+    @apply relative bg-neutral-300/10 border border-border/20 shadow-s hover:bg-neutral-300/20 hover:border-border/40 hover:shadow-m transition-all duration-300;
+  }
+
+  .gradient-text {
+    @apply bg-(image:--color-gradient) bg-clip-text text-transparent;
+  }
+
+  .background-text {
+    @apply text-xs uppercase leading-6 tracking-[0.4em] text-white/35 hidden lg:inline;
+  }
+
+  .card {
+    @apply rounded-2xl p-6 bg-bg/40 border border-border/20 shadow-s;
+  }
+
+  .card-hover {
+    @apply hover:bg-bg/50 hover:border-border/40 hover:shadow-(--glow-s) hover:-translate-y-1 transition-all duration-300;
+  }
+
+  .label {
+    @apply rounded-2xl border border-border/20 bg-bg-dark/40 px-5 py-3 text-text outline-none transition-all duration-300 
+    placeholder:text-text-muted/30 focus:border-primary/50 focus:bg-bg-dark/60;
+  }
+
+  .icon {
+    @apply flex size-14 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/5 text-primary;
+  }
+
+  .social-icon {
+    @apply flex size-11 items-center justify-center rounded-full border border-border/15 bg-white/3 text-text-muted 
+    transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:text-primary;
+  }
+
+  .glow-blue {
+    @apply pointer-events-none absolute rounded-full bg-blue-500/10 blur-3xl;
+  }
+
+  .glow-violet {
+    @apply pointer-events-none absolute rounded-full bg-violet-500/10 blur-3xl;
+  }
+
+  .glow-cyan {
+    @apply pointer-events-none absolute rounded-full bg-cyan-500/10 blur-3xl;
+  }
+
+  .bg-ring {
+    @apply absolute rounded-full border border-cyan-300/10;
+  }
+}
