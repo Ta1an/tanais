@@ -4,7 +4,7 @@ import Eyebrow from "../shared/eyebrow.vue";
 
 <template>
   <section
-    class="section grid lg:grid-cols-[0.75fr_1fr_0.5fr] gap-8 items-center"
+    class="section grid lg:grid-cols-[0.5fr_1fr_0.5fr] gap-8"
   >
     <Eyebrow text="Кто мы" class="lg:col-span-3" />
 

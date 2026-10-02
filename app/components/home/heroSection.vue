@@ -17,9 +17,8 @@ const check = [
       <Eyebrow text="центр психоогической помощи" />
 
       <h1>
-        Понять причину.
-        <span class="gradient-text block"> Изменить механизм. </span>
-        Вернуть управление жизнью.
+        Понять себя.
+        <span class="gradient-text block"> Изменить жизнь. </span>
       </h1>
 
       <p class="max-w-200">
@@ -44,7 +43,7 @@ const check = [
           class="inline-flex items-center justify-center gap-2"
         >
           <div
-            class="icon size-10 rounded-full border-emerald-400 bg-emerald-400/10 text-emerald-400"
+            class="icon size-8 rounded-full border-emerald-800 bg-emerald-400/5 text-emerald-400"
           >
             <Icon name="tabler:check" />
           </div>
@@ -54,45 +53,61 @@ const check = [
     </div>
 
     <!-- Right -->
-    <div class="relative items-center justify-center hidden lg:flex">
+    <div class="relative hidden items-center justify-center lg:flex">
+      <!-- Ambient glow -->
+      <div class="inset-[15%] glow-blue" />
+
       <!-- Orbital circles -->
       <div
-        v-for="size in [71, 88, 105]"
+        v-for="size in [75, 90, 105]"
         :key="size"
-        class="bg-ring left-1/2 top-1/2 aspect-square -translate-x-1/2 -translate-y-1/2"
-        :style="{ width: `${size}%` }"
+        class="bg-ring left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 aspect-square"
+        :style="{ width: `${size}% ` }"
       />
 
+      <!-- Photo label -->
       <div
-        class="pointer-events-none absolute left-1/2 top-1/2 size-105 -translate-x-1/2 -translate-y-1/2 rounded-full bg-radial from-blue-400/40 blur-3xl"
-      />
+        class="absolute left-0 -top-7 z-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-[3px]"
+      >
+        <span
+          class="size-1.75 rounded-full bg-[#00c8e9] shadow-[0_0_12px_#00c8e9]"
+        />
 
-      <img
-        src="/img/logo.png"
-        alt="Логотип Tanais"
-        class="hero-logo w-[max(70%,360px)] object-contain"
-      />
+        Команда TANAIS
+      </div>
 
-      <!-- Accent text -->
-      <div class="absolute -right-8 top-1/3">
-        <div class="background-text">
-          Больше
-          <br />
-          чем
-          <br />
-          поддержка
-        </div>
-
-        <div
-          class="mt-5 h-px w-10 bg-linear-to-r from-primary to-transparent"
+      <!-- Main photo -->
+      <div
+        class="relative z-2 w-[92%] overflow-hidden rounded-3xl border border-border/20 shadow-(--glow-m)"
+      >
+        <img
+          src="/img/about.jpg"
+          alt="Команда психологического центра TANAIS"
+          class="block h-auto w-full object-cover"
         />
       </div>
 
+      <!-- Floating info card -->
       <div
-        class="absolute bottom-0 right-0 -rotate-6 text-2xl font-light italic text-indigo-300/45"
+        class="absolute bottom-[10%] left-[-5%] z-10 flex items-center gap-3 card p-4 bg-bg/80 backdrop-blur-xl shadow-(--glow-m)"
       >
-        К себе. К жизни.
+        <div class="icon size-10">
+          <Icon name="tabler:heart-handshake" />
+        </div>
+
+        <div>
+          <span class="text-sm font-semibold"> Главное в нашей работе </span>
+
+          <span class="mt-1 block text-xs text-text-muted">
+            Внимание к каждому человеку
+          </span>
+        </div>
       </div>
+
+      <span
+        class="absolute -bottom-10 right-0 -rotate-6 text-2xl font-light italic text-indigo-300/45"
+        >К себе. К жизни</span
+      >
     </div>
 
     <!-- Bottom detail -->
@@ -103,24 +118,3 @@ const check = [
     </div>
   </section>
 </template>
-
-<style scoped>
-/* Logo composition */
-.hero-logo {
-  filter: drop-shadow(0 30px 65px rgba(23, 105, 234, 0.22))
-    drop-shadow(0 0 45px rgba(81, 218, 221, 0.08));
-
-  animation: logoFloat 7s ease-in-out infinite;
-}
-
-@keyframes logoFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-12px);
-  }
-}
-</style>

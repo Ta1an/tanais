@@ -46,7 +46,7 @@ function getStepProps(step: (typeof steps)[number]) {
 <template>
   <section id="process" class="section flex flex-col gap-8">
     <!-- Header -->
-    <div class="grid lg:grid-cols-[1fr_0.5fr] lg:items-end gap-8">
+    <div class="grid lg:grid-cols-[1fr_0.5fr] gap-8">
       <Eyebrow text="как проходит работа" class="lg:col-span-2" />
 
       <h2>
@@ -75,13 +75,6 @@ function getStepProps(step: (typeof steps)[number]) {
             : 'shadow-s'
         "
       >
-        <div
-          v-if="step.accent"
-          class="absolute right-1/2 translate-x-1/2 top-12 text-xs font-medium uppercase tracking-[0.3em] text-primary"
-        >
-          Ключевой этап
-        </div>
-
         <span
           class="text-5xl font-light tracking-[-0.06em] absolute right-7 top-7"
           :class="step.accent ? 'text-primary/30' : 'text-blue-400/20'"

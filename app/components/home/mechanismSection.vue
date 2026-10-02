@@ -262,7 +262,7 @@ const mechanismArrows = [
 
       <!-- button -->
       <NuxtLink
-        to="/approach"
+        to="/about#approach"
         class="button button-outline w-full shrink-0 lg:w-auto"
       >
         Подробнее о подходе

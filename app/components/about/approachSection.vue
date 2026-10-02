@@ -82,16 +82,11 @@ const mechanism = [
     </div>
 
     <div class="relative">
-      <!-- Desktop connection line -->
-      <div
-        class="pointer-events-none absolute left-[7%] right-[7%] top-1/2 hidden h-px -translate-y-1/2 bg-linear-to-r from-transparent via-primary/20 to-transparent lg:block"
-      />
-
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         <article
           v-for="(item, index) in mechanism"
           :key="item.title"
-          class="relative flex min-h-48 flex-col items-center justify-center gap-3 card bg-bg"
+          class="relative flex min-h-48 flex-col items-center justify-center gap-3 card text-center"
         >
           <!-- Icon -->
           <div class="icon rounded-full size-18">
@@ -120,7 +115,9 @@ const mechanism = [
         class="hidden h-0.5 w-20 bg-linear-to-r from-transparent to-primary/80 md:block"
       />
 
-      <p class="background-text md:inline">Поэтому мы смотрим на систему целиком</p>
+      <p class="background-text md:inline">
+        Поэтому мы смотрим на систему целиком
+      </p>
 
       <div
         class="hidden h-0.5 w-20 bg-linear-to-l from-transparent to-primary/80 md:block"
