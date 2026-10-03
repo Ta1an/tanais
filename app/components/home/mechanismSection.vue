@@ -93,7 +93,7 @@ const mechanismArrows = [
 </script>
 
 <template>
-  <section id="mechanism" class="section flex flex-col gap-8">
+  <section id="mechanism" class="section flex flex-col gap-10">
     <!-- =====================================
            MAIN
       ====================================== -->
@@ -104,20 +104,22 @@ const mechanismArrows = [
         <Eyebrow text="Как мы понимаем проблему" />
 
         <!-- heading -->
-        <h2>
-          Проблема держится
-          <span class="gradient-text block"> не только на симптоме. </span>
-        </h2>
+        <div class="flex flex-col gap-4">
+          <h2>
+            Проблема держится
+            <span class="gradient-text block"> не только на симптоме. </span>
+          </h2>
 
-        <!-- text -->
-        <p class="max-w-xl leading-relaxed">
-          Даже когда человек всё понимает, состояние может сохраняться. Мы
-          разбираем не только проявление, но и то, что поддерживает его снова и
-          снова: реакции нервной системы, эмоции, мысли, поведение и среду.
-        </p>
+          <!-- text -->
+          <p class="max-w-xl leading-relaxed">
+            Даже когда человек всё понимает, состояние может сохраняться. Мы
+            разбираем не только проявление, но и то, что поддерживает его снова
+            и снова: реакции нервной системы, эмоции, мысли, поведение и среду.
+          </p>
+        </div>
 
         <!-- small thought -->
-        <div class="hidden max-w-sm items-start gap-5 lg:flex">
+        <div class="hidden max-w-sm items-start gap-4 lg:flex">
           <div
             class="h-24 w-px shrink-0 bg-linear-to-b from-primary to-transparent"
           />
@@ -197,7 +199,7 @@ const mechanismArrows = [
       <!-- =====================================
              MOBILE MECHANISM
         ====================================== -->
-      <div class="grid grid-cols-2 gap-3 lg:hidden">
+      <div class="grid grid-cols-2 gap-4 lg:hidden">
         <div
           v-for="item in mechanism"
           :key="`mobile-${item.title}`"
@@ -213,7 +215,7 @@ const mechanismArrows = [
         <div class="col-span-2 card border-primary/20 bg-primary/5 text-center">
           <span class="text-lg font-medium text-text"> Всё взаимосвязано </span>
 
-          <p class="mt-2 text-sm">
+          <p class="text-sm">
             Изменение одного звена может влиять на работу всей системы.
           </p>
         </div>
@@ -244,7 +246,7 @@ const mechanismArrows = [
     <!-- =====================================
            BOTTOM CTA
       ====================================== -->
-    <div class="card bg-bg flex flex-col gap-6 lg:flex-row lg:items-center">
+    <div class="card bg-bg flex flex-col gap-5 lg:flex-row lg:items-center">
       <!-- icon -->
       <div class="icon rounded-full shadow-(--glow-s)">
         <Icon name="tabler:circles-relation" class="size-7" />
@@ -254,7 +256,7 @@ const mechanismArrows = [
       <div class="flex-1">
         <h4>Поэтому мы начинаем не с ярлыка, а с разбора механизма.</h4>
 
-        <p class="mt-2 text-sm leading-relaxed">
+        <p class="text-sm leading-relaxed">
           Помогаем увидеть, что именно поддерживает состояние в вашей ситуации,
           и определить дальнейший маршрут работы.
         </p>

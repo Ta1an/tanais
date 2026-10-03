@@ -88,7 +88,7 @@ watch(
 
 <template>
   <header
-    class="fixed left-0 right-0 top-0 z-50 mx-5 my-4 md:mx-[10%] flex items-center justify-between rounded-3xl border border-border/20 bg-bg/85 px-5 py-2 shadow-s backdrop-blur-xl"
+    class="fixed left-0 right-0 top-0 z-50 mx-5 my-4 md:mx-[10%] flex items-center justify-between rounded-3xl border border-border/20 bg-bg/85 px-6 py-2 shadow-s backdrop-blur-xl"
   >
     <NuxtLink
       to="/"
@@ -112,12 +112,12 @@ watch(
       </span>
     </NuxtLink>
 
-    <nav class="hidden lg:flex gap-8">
+    <nav class="hidden lg:flex gap-6 items-center">
       <div v-for="item in navItems" :key="item.label" class="group relative">
         <template v-if="item.children">
           <NuxtLink
             :to="item.href"
-            class="relative flex items-center gap-1.5 py-5 text-[clamp(0.5rem_1vw_1.25rem)] transition-colors duration-300"
+            class="relative flex items-center gap-1 text-[clamp(0.5rem_1vw_1.25rem)] transition-colors duration-300"
             :class="
               isActive(item.href)
                 ? 'text-primary'
@@ -133,17 +133,17 @@ watch(
 
             <!-- active line -->
             <span
-              class="absolute bottom-3 left-0 h-px bg-(image:--color-gradient) transition-all duration-300"
+              class="absolute -bottom-1 left-0 h-px bg-(image:--color-gradient) transition-all duration-300"
               :class="isActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'"
             />
           </NuxtLink>
 
           <!-- Dropdown -->
           <div
-            class="pointer-events-none absolute left-1/2 top-[calc(100%-4px)] w-78 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100"
+            class="pointer-events-none absolute left-1/2 top-full w-78 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100"
           >
             <!-- invisible bridge -->
-            <div class="h-6" />
+            <div class="h-9" />
 
             <div
               class="rounded-2xl border border-border/20 bg-bg/95 p-2 shadow-l backdrop-blur-2xl"
@@ -179,7 +179,7 @@ watch(
         <NuxtLink
           v-else
           :to="item.href"
-          class="relative block py-5 text-[clamp(0.75rem_0.5vw_1.25rem)] transition-colors duration-300"
+          class="relative block text-[clamp(0.75rem_0.5vw_1.25rem)] transition-colors duration-300"
           :class="
             isActive(item.href)
               ? 'text-primary'
@@ -189,7 +189,7 @@ watch(
           {{ item.label }}
 
           <span
-            class="absolute bottom-3 left-0 h-px bg-(image:--color-gradient) transition-all duration-300"
+            class="absolute -bottom-1 left-0 h-px bg-(image:--color-gradient) transition-all duration-300"
             :class="isActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'"
           />
         </NuxtLink>
@@ -202,7 +202,7 @@ watch(
     <div class="hidden lg:block">
       <NuxtLink
         to="/contacts"
-        class="button button-primary translate-0 px-6 py-3.5"
+        class="button button-primary translate-0"
       >
         Записаться
       </NuxtLink>
@@ -244,7 +244,7 @@ watch(
             >
               <NuxtLink
                 :to="item.href"
-                class="flex-1 px-4 py-3.5 font-medium"
+                class="flex-1 px-4 py-3 font-medium"
                 :class="
                   isActive(item.href) ? 'text-primary' : 'text-text-muted'
                 "
@@ -296,7 +296,7 @@ watch(
           <NuxtLink
             v-else
             :to="item.href"
-            class="block rounded-xl px-4 py-3.5 font-medium transition-colors hover:bg-white/5"
+            class="block rounded-xl px-4 py-3 font-medium transition-colors hover:bg-white/5"
             :class="
               isActive(item.href)
                 ? 'text-primary'

@@ -4,7 +4,7 @@ import Eyebrow from "../shared/eyebrow.vue";
 
 <template>
   <section
-    class="section grid min-h-svh grid-cols-1 items-center gap-12 lg:grid-cols-[0.75fr_1fr] lg:gap-16 top-section"
+    class="section grid min-h-svh grid-cols-1 items-center gap-10 lg:grid-cols-[0.75fr_1fr] top-section"
   >
     <!-- Left -->
     <div class="flex flex-col gap-8">
@@ -36,7 +36,7 @@ import Eyebrow from "../shared/eyebrow.vue";
 
       <!-- Trust -->
       <div
-        class="flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-text-muted/65"
+        class="flex flex-wrap items-center gap-x-4 text-sm text-text-muted/65"
       >
         <span class="flex items-center gap-2">
           <Icon name="tabler:award" class="size-4 text-primary" />

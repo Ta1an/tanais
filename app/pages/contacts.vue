@@ -115,7 +115,7 @@ function sendToWhatsApp() {
         шаг.
       </p>
 
-      <div class="flex flex-wrap gap-3">
+      <div class="flex flex-wrap gap-4">
         <a
           :href="`https://wa.me/${contacts.whatsappRaw}`"
           target="_blank"
@@ -200,13 +200,8 @@ function sendToWhatsApp() {
           <span class="gradient-text"> о ситуации. </span>
         </h3>
 
-        <p class="text-sm">
-          После заполнения форма откроет WhatsApp с уже подготовленным
-          сообщением. Перед отправкой его можно изменить.
-        </p>
-
-        <form class="grid gap-5" @submit.prevent="sendToWhatsApp">
-          <div class="grid gap-5 md:grid-cols-2">
+        <form class="grid gap-4" @submit.prevent="sendToWhatsApp">
+          <div class="grid gap-4 md:grid-cols-2">
             <label class="flex flex-col gap-2">
               <span class="text-sm text-text-muted/70">
                 Как к вам обращаться

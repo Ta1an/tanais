@@ -51,23 +51,25 @@ const mechanisms = [
        HERO
   ========================================= -->
   <section
-    class="section top-section grid grid-cols-1 items-center gap-12 lg:grid-cols-2"
+    class="section top-section grid grid-cols-1 items-center lg:grid-cols-2"
   >
     <div class="flex flex-col gap-8">
       <Eyebrow text="Зависимости" />
 
-      <h1>
-        Зависимость —
-        <span class="gradient-text block"> это не только поведение. </span>
-      </h1>
+      <div class="flex flex-col gap-4">
+        <h1>
+          Зависимость —
+          <span class="gradient-text block"> это не только поведение. </span>
+        </h1>
 
-      <p class="max-w-3xl leading-relaxed">
-        Мы рассматриваем зависимость как устойчивый цикл, в котором
-        взаимодействуют система подкрепления, эмоциональное состояние, привычные
-        реакции, среда и повторение.
-      </p>
+        <p class="max-w-3xl leading-relaxed">
+          Мы рассматриваем зависимость как устойчивый цикл, в котором
+          взаимодействуют система подкрепления, эмоциональное состояние,
+          привычные реакции, среда и повторение.
+        </p>
+      </div>
 
-      <div class="flex flex-wrap gap-3">
+      <div class="flex flex-wrap gap-4">
         <NuxtLink
           to="/directions/addictions/gambling"
           class="button button-primary"
@@ -88,7 +90,7 @@ const mechanisms = [
       <div class="max-w-sm border-l border-primary/20 pl-8">
         <Icon name="tabler:brain" class="mb-5 size-9 text-primary" />
 
-        <p class="!text-sm leading-[1.8] text-text-muted/65">
+        <p class="text-sm text-text-muted/65">
           Ключевая специализация TANAIS в направлении зависимостей — игровая
           зависимость. Также центр работает с алкогольной зависимостью и
           зависимостью от ПАВ.
@@ -102,10 +104,10 @@ const mechanisms = [
   ========================================= -->
   <section class="section flex flex-col gap-10">
     <div class="grid gap-8 lg:grid-cols-2">
-      <div>
+      <div class="flex flex-col gap-8">
         <Eyebrow text="Ключевая специализация" />
 
-        <h2 class="mt-7">
+        <h2>
           Игровая
           <span class="gradient-text"> зависимость </span>
         </h2>
@@ -120,32 +122,30 @@ const mechanisms = [
 
     <NuxtLink
       to="/directions/addictions/gambling"
-      class="group card card-hover relative grid min-h-[420px] overflow-hidden lg:grid-cols-[1fr_0.7fr]"
+      class="group card card-hover relative grid overflow-hidden lg:grid-cols-[1fr_0.7fr]"
     >
       <!-- Glow -->
       <div
-        class="pointer-events-none absolute -right-20 -top-20 size-96 rounded-full bg-blue-500/10 blur-[100px] transition-all duration-700 group-hover:bg-violet-500/15"
+        class="glow-blue -right-20 -top-20 size-96 ] transition-all duration-700 group-hover:bg-violet-500/15"
       />
 
       <!-- Content -->
-      <div class="relative z-10 flex flex-col justify-center">
+      <div class="relative flex flex-col gap-6">
         <span
-          class="w-fit rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-primary"
+          class="w-fit rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-primary"
         >
           Основное направление
         </span>
 
-        <h3 class="mt-7 max-w-2xl !text-[clamp(2rem,4vw,3.5rem)] font-semibold">
-          Игровая зависимость
-        </h3>
+        <h3>Игровая зависимость</h3>
 
-        <p class="mt-5 max-w-2xl !text-base leading-[1.8] text-text-muted/70">
+        <p class="max-w-2xl text-base text-text-muted/70">
           Потеря контроля, повторяющиеся попытки остановиться, финансовые
           последствия, скрытность, долги и возвращение к игре несмотря на
           принятое решение.
         </p>
 
-        <div class="mt-7 flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-2">
           <span
             v-for="tag in ['Лудомания', 'Ставки', 'Казино', 'Срывы']"
             :key="tag"
@@ -155,9 +155,7 @@ const mechanisms = [
           </span>
         </div>
 
-        <div
-          class="mt-10 flex items-center gap-2 text-sm font-medium text-primary"
-        >
+        <div class="flex items-center gap-2 text-sm font-medium text-primary">
           Подробнее об игровой зависимости
 
           <Icon
@@ -168,20 +166,18 @@ const mechanisms = [
       </div>
 
       <!-- Visual -->
-      <div
-        class="relative hidden min-h-[350px] items-center justify-center lg:flex"
-      >
+      <div class="relative hidden items-center justify-center lg:flex">
         <div
           v-for="size in [86, 64, 42]"
           :key="size"
-          class="absolute aspect-square rounded-full border border-primary/10"
+          class="bg-ring aspect-square"
           :style="{ width: `${size}%` }"
         />
 
         <div
           class="relative z-10 flex size-36 items-center justify-center rounded-full border border-primary/25 bg-primary/5 text-primary shadow-(--glow-m)"
         >
-          <Icon name="tabler:device-gamepad-2" class="size-18" />
+          <Icon name="tabler:cards" class="size-18" />
         </div>
       </div>
     </NuxtLink>
@@ -192,10 +188,10 @@ const mechanisms = [
   ========================================= -->
   <section class="section flex flex-col gap-10">
     <div class="grid gap-8 lg:grid-cols-2">
-      <div>
+      <div class="flex flex-col gap-8">
         <Eyebrow text="Другие формы зависимости" />
 
-        <h2 class="mt-7">
+        <h2>
           Работаем и с другими
           <span class="gradient-text block"> зависимыми сценариями. </span>
         </h2>
@@ -208,39 +204,39 @@ const mechanisms = [
       </p>
     </div>
 
-    <div class="grid gap-5 lg:grid-cols-2">
+    <div class="grid gap-4 lg:grid-cols-2">
       <article
         v-for="item in otherAddictions"
         :key="item.title"
-        class="card flex min-h-[330px] flex-col"
+        class="card flex flex-col gap-4"
       >
-        <div class="flex items-start justify-between gap-5">
+        <div class="flex items-start justify-between gap-4">
           <div class="icon size-18">
             <Icon :name="item.icon" class="size-9" />
           </div>
 
           <span
-            class="text-[10px] font-medium uppercase tracking-[0.17em] text-text-muted/40"
+            class="text-xs text-right font-medium uppercase tracking-[0.17em] text-text-muted/40"
           >
             Дополнительное направление
           </span>
         </div>
 
-        <div class="mt-7 text-xs uppercase tracking-[0.16em] text-primary/75">
+        <div class="text-xs uppercase tracking-[0.16em] text-primary">
           {{ item.subtitle }}
         </div>
 
-        <h3 class="mt-3 !text-2xl font-semibold">
+        <h3>
           {{ item.title }}
         </h3>
 
-        <p class="mt-5 !text-base leading-[1.75] text-text-muted/65">
+        <p class="text-base text-text-muted/65">
           {{ item.text }}
         </p>
 
         <NuxtLink
           to="/contacts"
-          class="mt-auto flex items-center gap-2 pt-8 text-sm font-medium text-primary"
+          class="flex items-center gap-2 text-sm font-medium text-primary"
         >
           Обсудить ситуацию
 
@@ -265,17 +261,21 @@ const mechanisms = [
       </h2>
     </div>
 
-    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      <article v-for="item in mechanisms" :key="item.title" class="card">
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <article
+        v-for="item in mechanisms"
+        :key="item.title"
+        class="card flex flex-col gap-3"
+      >
         <div class="icon size-14">
           <Icon :name="item.icon" class="size-7" />
         </div>
 
-        <h3 class="mt-6 !text-xl font-semibold">
+        <h4>
           {{ item.title }}
-        </h3>
+        </h4>
 
-        <p class="mt-3 !text-sm leading-[1.7] text-text-muted/65">
+        <p class="text-sm text-text-muted/65">
           {{ item.text }}
         </p>
       </article>
@@ -286,32 +286,46 @@ const mechanisms = [
        FAMILY
   ========================================= -->
   <section class="section">
-    <div
-      class="card grid gap-8 overflow-hidden bg-bg/60 lg:grid-cols-[1fr_auto] lg:items-center"
-    >
-      <div>
+    <div class="overflow-hidden card py-14 grid lg:grid-cols-[1fr_0.7fr]">
+      <!-- Content -->
+      <div class="flex flex-col gap-8 items-start">
         <Eyebrow text="Если зависимость у близкого" />
 
-        <h2 class="mt-7">
-          Семья тоже оказывается
-          <span class="gradient-text"> внутри этого цикла. </span>
-        </h2>
+        <div class="flex flex-col gap-4">
+          <h2>
+            Семья тоже оказывается
+            <span class="gradient-text"> внутри этого цикла. </span>
+          </h2>
+          <p>
+            Контроль, финансовая помощь, спасательство, угрозы или постоянные
+            проверки часто возникают из желания помочь. Но семье также важно
+            понимать собственную роль и сохранять границы.
+          </p>
+        </div>
 
-        <p class="mt-5 max-w-3xl">
-          Контроль, финансовая помощь, спасательство, угрозы или постоянные
-          проверки часто возникают из желания помочь. Но семье также важно
-          понимать собственную роль и сохранять границы.
-        </p>
+        <NuxtLink
+          to="/directions/codependency"
+          class="button button-outline inline-flex items-center gap-2"
+        >
+          О созависимости
+          <Icon name="tabler:arrow-right" class="size-5" />
+        </NuxtLink>
       </div>
 
-      <NuxtLink
-        to="/directions/codependency"
-        class="button button-outline shrink-0"
-      >
-        О созависимости
+      <div class="relative hidden items-center justify-center lg:flex">
+        <div
+          v-for="size in [100, 80, 60]"
+          :key="size"
+          class="bg-ring aspect-square"
+          :style="{ width: `${size}%` }"
+        />
 
-        <Icon name="tabler:arrow-right" class="size-5" />
-      </NuxtLink>
+        <div
+          class="flex size-50 items-center justify-center rounded-full border border-primary/25 bg-primary/5 text-primary shadow-(--glow-m)"
+        >
+          <Icon name="tabler:heart-handshake" class="size-25" />
+        </div>
+      </div>
     </div>
   </section>
 

@@ -44,7 +44,7 @@ function getStepProps(step: (typeof steps)[number]) {
 </script>
 
 <template>
-  <section id="process" class="section flex flex-col gap-8">
+  <section id="process" class="section flex flex-col gap-10">
     <!-- Header -->
     <div class="grid lg:grid-cols-[1fr_0.5fr] gap-8">
       <Eyebrow text="как проходит работа" class="lg:col-span-2" />

@@ -13,7 +13,7 @@ import Eyebrow from "../shared/eyebrow.vue";
       <span class="gradient-text block"> где дают готовые ответы. </span>
     </h2>
 
-    <div class="flex flex-col gap-5">
+    <div class="flex flex-col gap-4">
       <p>
         TANAIS — центр психологической помощи, в котором работа строится вокруг
         понимания конкретного человека, его состояния, жизненной ситуации и

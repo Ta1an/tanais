@@ -59,11 +59,11 @@ const mechanism = [
 </script>
 
 <template>
-  <section id="approach" class="section flex flex-col gap-8">
+  <section id="approach" class="section flex flex-col gap-10">
     <!-- =========================================
          HEADER
     ========================================== -->
-    <div class="grid gap-8 lg:grid-cols-[1fr_0.75fr] lg:items-end">
+    <div class="grid lg:grid-cols-[1fr_0.75fr] lg:items-end">
       <div class="flex flex-col gap-8">
         <Eyebrow text="Наш подход" />
 
@@ -82,7 +82,7 @@ const mechanism = [
     </div>
 
     <div class="relative">
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         <article
           v-for="(item, index) in mechanism"
           :key="item.title"

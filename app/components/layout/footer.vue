@@ -14,7 +14,7 @@ const links = [
   {
     title: "Направления",
     links: [
-      { label: "Зависимость", to: "/directions/dependency" },
+      { label: "Зависимость", to: "/directions/addictions" },
       { label: "Созависимость", to: "/directions/codependency" },
     ],
   },

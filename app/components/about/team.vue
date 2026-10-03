@@ -29,8 +29,8 @@ const specialists = [
 </script>
 
 <template>
-  <section id="team" class="section flex flex-col gap-8">
-    <div class="grid gap-7 lg:grid-cols-[1fr_0.65fr] lg:items-end">
+  <section id="team" class="section flex flex-col gap-10">
+    <div class="grid lg:grid-cols-[1fr_0.5fr] lg:items-end">
       <div class="flex flex-col gap-8">
         <Eyebrow text="команда" />
 

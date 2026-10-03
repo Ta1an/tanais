@@ -23,7 +23,7 @@ const questions = [
 <template>
   <section class="section relative">
     <div
-      class="grid gap-12 lg:grid-cols-2 lg:items-center bg-bg/80 p-14 rounded-4xl shadow-(--glow-m) border border-border/20"
+      class="grid gap-10 lg:grid-cols-2 lg:items-center bg-bg/80 p-14 rounded-4xl shadow-(--glow-m) border border-border/20"
     >
       <!-- left -->
       <div class="flex flex-col gap-8">

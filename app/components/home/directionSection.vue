@@ -115,32 +115,32 @@ const directions = [
           />
         </div>
       </NuxtLink>
-    </div>
 
-    <div
-      class="grid md:grid-cols-[auto_1fr_auto] md:grid-flow-col gap-x-5 gap-y-2 rounded-3xl border border-border/10 bg-bg/40 px-6 py-5"
-    >
-      <div class="icon size-12 hidden md:flex row-span-2">
-        <Icon name="lucide:plus" class="size-5" />
-      </div>
-
-      <h4>Работаем и с другими формами зависимости</h4>
-
-      <p class="text-sm text-text-muted/55">
-        Алкогольная, наркотическая и другие формы зависимого поведения.
-      </p>
-
-      <NuxtLink
-        to="/directions/addictions"
-        class="self-center md:row-span-2 flex shrink-0 items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-violet-400"
+      <div
+        class="grid md:grid-cols-[auto_1fr_auto] md:grid-flow-col items-center gap-x-5 card lg:col-span-2"
       >
-        Подробнее
+        <div class="icon size-12 hidden md:flex row-span-2">
+          <Icon name="lucide:plus" class="size-5" />
+        </div>
 
-        <Icon name="lucide:arrow-right" class="size-4" />
-      </NuxtLink>
+        <h4>Работаем и с другими формами зависимости</h4>
+
+        <p class="text-sm text-text-muted/55">
+          Алкогольная, наркотическая и другие формы зависимого поведения.
+        </p>
+
+        <NuxtLink
+          to="/directions/addictions"
+          class="self-center md:row-span-2 flex shrink-0 items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-violet-400"
+        >
+          Подробнее
+
+          <Icon name="lucide:arrow-right" class="size-4" />
+        </NuxtLink>
+      </div>
     </div>
 
-    <div class="card flex flex-col gap-6 bg-bg lg:flex-row lg:items-center">
+    <div class="card flex flex-col gap-5 bg-bg lg:flex-row lg:items-center">
       <div class="icon rounded-full shadow-(--glow-s)">
         <Icon name="lucide:message-circle-more" class="size-7" />
       </div>
@@ -148,7 +148,7 @@ const directions = [
       <div class="flex-1">
         <h4>Не уверены, с чего начать?</h4>
 
-        <p class="mt-2 text-sm leading-relaxed">
+        <p class="text-sm leading-relaxed">
           Расскажите, что происходит. Поможем определить, какой первый шаг имеет
           смысл именно в вашей ситуации.
         </p>

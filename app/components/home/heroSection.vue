@@ -16,15 +16,17 @@ const check = [
     <div class="flex flex-col gap-8">
       <Eyebrow text="центр психоогической помощи" />
 
-      <h1>
-        Понять себя.
-        <span class="gradient-text block"> Изменить жизнь. </span>
-      </h1>
+      <div class="flex flex-col gap-4">
+        <h1>
+          Понять себя.
+          <span class="gradient-text block"> Изменить жизнь. </span>
+        </h1>
 
-      <p class="max-w-200">
-        Помогаем разобраться в причинах состояния, увидеть механизм проблемы и
-        выстроить персональный путь изменений.
-      </p>
+        <p class="max-w-200">
+          Помогаем разобраться в причинах состояния, увидеть механизм проблемы и
+          выстроить персональный путь изменений.
+        </p>
+      </div>
 
       <!-- Actions -->
       <div class="flex gap-4 flex-wrap">

@@ -119,14 +119,8 @@ const filteredMaterials = computed(() => {
     return materials;
   }
 
-  return materials.filter(
-    (material) => material.type === activeFilter.value,
-  );
+  return materials.filter((material) => material.type === activeFilter.value);
 });
-
-const featuredMaterial = computed(() =>
-  materials.find((material) => material.featured),
-);
 
 const typeLabels: Record<MaterialType, string> = {
   test: "Тест",
@@ -149,8 +143,7 @@ const typeIcons: Record<MaterialType, string> = {
          HERO
     ========================================== -->
     <section
-      class="section top-section grid grid-cols-1
-             items-center gap-12 lg:grid-cols-2"
+      class="section top-section grid grid-cols-1 items-center lg:grid-cols-2"
     >
       <!-- Left -->
       <div class="flex flex-col gap-8">
@@ -158,290 +151,87 @@ const typeIcons: Record<MaterialType, string> = {
 
         <h1>
           Понять происходящее
-          <span class="gradient-text block">
-            немного глубже.
-          </span>
+          <span class="gradient-text block"> немного глубже. </span>
         </h1>
 
         <p class="max-w-3xl">
-          Тесты для самооценки, видео, статьи и практические материалы
-          о зависимом поведении, тревоге, отношениях и работе с семьёй.
+          Тесты для самооценки, видео, статьи и практические материалы о
+          зависимом поведении, тревоге, отношениях и работе с семьёй.
         </p>
       </div>
 
       <!-- Right -->
       <div class="hidden justify-end lg:flex">
-        <div
-          class="max-w-md border-l
-                 border-primary/20 pl-8"
-        >
-          <Icon
-            name="tabler:books"
-            class="mb-5 size-9 text-primary"
-          />
+        <div class="max-w-md border-l border-primary/20 pl-8">
+          <Icon name="tabler:books" class="mb-5 size-9 text-primary" />
 
-          <p class="!text-sm leading-[1.8] text-text-muted/65">
-            Материалы помогают лучше ориентироваться
-            в теме, но не заменяют индивидуальную оценку
-            состояния и работу со специалистом.
+          <p class="text-sm text-text-muted/65">
+            Материалы помогают лучше ориентироваться в теме, но не заменяют
+            индивидуальную оценку состояния и работу со специалистом.
           </p>
         </div>
       </div>
-    </section>
-
-    <!-- =========================================
-         TYPES
-    ========================================== -->
-    <section class="section !pt-4">
-      <div class="flex flex-col gap-8">
-        <div class="grid gap-8 lg:grid-cols-2">
-          <div>
-            <Eyebrow text="Библиотека TANAIS" />
-
-            <h2 class="mt-7">
-              Выберите
-              <span class="gradient-text">
-                формат.
-              </span>
-            </h2>
-          </div>
-
-          <p class="max-w-xl lg:justify-self-end lg:self-end">
-            Можно начать с короткого теста, посмотреть видео,
-            изучить статью или воспользоваться практическим материалом.
-          </p>
-        </div>
-
-        <!-- Filter cards -->
-        <div
-          class="grid grid-cols-2 gap-3
-                 md:grid-cols-3 lg:grid-cols-5"
-        >
-          <button
-            v-for="filter in filters"
-            :key="filter.value"
-            type="button"
-            class="group flex min-h-28
-                   flex-col items-center justify-center
-                   gap-3 rounded-3xl border
-                   px-5 py-6
-                   transition-all duration-300"
-            :class="
-              activeFilter === filter.value
-                ? 'border-primary/40 bg-primary/10 text-primary shadow-(--glow-s)'
-                : 'border-border/15 bg-bg/60 text-text-muted hover:border-primary/25 hover:bg-bg'
-            "
-            @click="activeFilter = filter.value"
-          >
-            <Icon
-              :name="filter.icon"
-              class="size-7"
-            />
-
-            <span class="font-medium">
-              {{ filter.label }}
-            </span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================
-         FEATURED
-    ========================================== -->
-    <section
-      v-if="featuredMaterial && activeFilter === 'all'"
-      class="section"
-    >
-      <NuxtLink
-        :to="featuredMaterial.to"
-        class="group relative grid
-               overflow-hidden rounded-[2rem]
-               border border-primary/20
-               bg-bg/75
-               shadow-(--glow-s)
-               backdrop-blur-xl
-               lg:grid-cols-[1fr_0.8fr]"
-      >
-        <!-- Left -->
-        <div class="flex flex-col justify-center p-8 md:p-12">
-          <div
-            class="mb-7 flex flex-wrap
-                   items-center gap-3"
-          >
-            <span
-              class="rounded-full
-                     border border-primary/20
-                     bg-primary/5
-                     px-4 py-2
-                     text-xs font-medium
-                     uppercase
-                     tracking-[0.18em]
-                     text-primary"
-            >
-              Рекомендуем начать здесь
-            </span>
-
-            <span
-              class="text-xs text-text-muted/50"
-            >
-              {{ featuredMaterial.meta }}
-            </span>
-          </div>
-
-          <h2
-            class="max-w-3xl
-                   !text-[clamp(2rem,4vw,3.5rem)]
-                   !leading-[1.1]"
-          >
-            {{ featuredMaterial.title }}
-          </h2>
-
-          <p
-            class="mt-6 max-w-2xl
-                   leading-[1.7]"
-          >
-            {{ featuredMaterial.description }}
-          </p>
-
-          <div
-            class="mt-8 flex items-center gap-2
-                   font-medium text-primary"
-          >
-            Пройти тест
-
-            <Icon
-              name="tabler:arrow-right"
-              class="size-5
-                     transition-transform duration-300
-                     group-hover:translate-x-2"
-            />
-          </div>
-        </div>
-
-        <!-- Right visual -->
-        <div
-          class="relative flex min-h-[320px]
-                 items-center justify-center
-                 overflow-hidden
-                 bg-blue-950/30"
-        >
-          <div
-            class="absolute size-[330px]
-                   rounded-full
-                   bg-blue-500/10
-                   blur-[80px]"
-          />
-
-          <div
-            v-for="size in [72, 52, 34]"
-            :key="size"
-            class="absolute aspect-square
-                   rounded-full
-                   border border-primary/10"
-            :style="{ width: `${size}%` }"
-          />
-
-          <div
-            class="relative z-10
-                   flex size-32
-                   items-center justify-center
-                   rounded-full
-                   border border-primary/25
-                   bg-primary/5
-                   text-primary
-                   shadow-(--glow-m)"
-          >
-            <Icon
-              :name="featuredMaterial.icon"
-              class="size-16"
-            />
-          </div>
-        </div>
-      </NuxtLink>
     </section>
 
     <!-- =========================================
          MATERIALS
     ========================================== -->
-    <section class="section flex flex-col gap-9">
+    <section class="section flex flex-col gap-10">
       <div
-        class="flex flex-col gap-5
-               md:flex-row md:items-end
-               md:justify-between"
+        class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
       >
-        <div>
-          <Eyebrow
-            :text="
-              activeFilter === 'all'
-                ? 'Все материалы'
-                : filters.find((item) => item.value === activeFilter)?.label ?? ''
-            "
-          />
-
-          <h2 class="mt-7">
-            {{
-              activeFilter === "all"
-                ? "Исследуйте библиотеку"
-                : "Выберите материал"
-            }}
-          </h2>
-        </div>
+        <Eyebrow text="Библиотека материалов" />
 
         <span class="text-sm text-text-muted/50">
           {{ filteredMaterials.length }}
-          {{
-            filteredMaterials.length === 1
-              ? "материал"
-              : "материалов"
-          }}
+          {{ filteredMaterials.length === 1 ? "материал" : "материалов" }}
         </span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
+        <button
+          v-for="filter in filters"
+          :key="filter.value"
+          type="button"
+          class="group flex items-center gap-2 rounded-xl border px-5 py-2 transition-all duration-300"
+          :class="
+            activeFilter === filter.value
+              ? 'border-primary/40 bg-primary/10 text-primary shadow-(--glow-s)'
+              : 'border-border/15 bg-bg/60 text-text-muted hover:border-primary/25 hover:bg-bg'
+          "
+          @click="activeFilter = filter.value"
+        >
+          <Icon :name="filter.icon" class="size-6" />
+
+          <span class="font-medium">
+            {{ filter.label }}
+          </span>
+        </button>
       </div>
 
       <TransitionGroup
         name="materials"
         tag="div"
-        class="grid gap-5
-               md:grid-cols-2
-               xl:grid-cols-3"
+        class="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
       >
         <NuxtLink
           v-for="material in filteredMaterials"
           :key="material.to"
           :to="material.to"
-          class="group card card-hover
-                 flex min-h-[370px]
-                 flex-col"
+          class="group card card-hover flex flex-col"
         >
           <!-- Header -->
-          <div
-            class="flex items-start
-                   justify-between gap-5"
-          >
+          <div class="flex items-start justify-between gap-5">
             <div
-              class="icon size-16
-                     transition-colors duration-300
-                     group-hover:text-violet-400"
+              class="icon size-16 transition-colors duration-300 group-hover:text-violet-400"
             >
-              <Icon
-                :name="material.icon"
-                class="size-8"
-              />
+              <Icon :name="material.icon" class="size-8" />
             </div>
 
             <div
-              class="flex items-center gap-2
-                     rounded-full
-                     border border-border/10
-                     bg-white/3
-                     px-3 py-1.5
-                     text-xs
-                     text-text-muted/60"
+              class="flex items-center gap-2 rounded-full border border-border/10 bg-white/3 px-3 py-1.5 text-xs text-text-muted/60"
             >
-              <Icon
-                :name="typeIcons[material.type]"
-                class="size-4"
-              />
+              <Icon :name="typeIcons[material.type]" class="size-4" />
 
               {{ typeLabels[material.type] }}
             </div>
@@ -449,46 +239,28 @@ const typeIcons: Record<MaterialType, string> = {
 
           <!-- Category -->
           <div
-            class="mt-8 text-xs
-                   font-medium uppercase
-                   tracking-[0.2em]
-                   text-primary/70"
+            class="mt-8 text-xs font-medium uppercase tracking-[0.2em] text-primary/70"
           >
             {{ material.category }}
           </div>
 
           <!-- Content -->
-          <h3
-            class="mt-3 !text-xl
-                   font-semibold leading-snug"
-          >
+          <h3 class="mt-3 text-xl font-semibold leading-snug">
             {{ material.title }}
           </h3>
 
-          <p
-            class="mt-4 !text-sm
-                   leading-[1.7]
-                   text-text-muted/70"
-          >
+          <p class="mt-4 text-sm leading-[1.7] text-text-muted/70">
             {{ material.description }}
           </p>
 
           <!-- Footer -->
-          <div
-            class="mt-auto flex items-end
-                   justify-between gap-5 pt-8"
-          >
-            <span
-              class="text-xs
-                     text-text-muted/45"
-            >
+          <div class="mt-auto flex items-end justify-between gap-5 pt-8">
+            <span class="text-xs text-text-muted/45">
               {{ material.meta }}
             </span>
 
             <div
-              class="flex items-center gap-2
-                     text-sm font-medium
-                     text-primary"
+              class="flex items-center gap-2 text-sm font-medium text-primary"
             >
               <span>
                 {{
@@ -504,9 +276,7 @@ const typeIcons: Record<MaterialType, string> = {
 
               <Icon
                 name="tabler:arrow-right"
-                class="size-5
-                       transition-transform duration-300
-                       group-hover:translate-x-1.5"
+                class="size-5 transition-transform duration-300 group-hover:translate-x-1.5"
               />
             </div>
           </div>
@@ -514,60 +284,30 @@ const typeIcons: Record<MaterialType, string> = {
       </TransitionGroup>
 
       <!-- Empty -->
-      <div
-        v-if="!filteredMaterials.length"
-        class="rounded-3xl
-               border border-border/15
-               bg-bg/50
-               p-12 text-center"
-      >
+      <div v-if="!filteredMaterials.length" class="card p-12 text-center">
         <Icon
           name="tabler:folder-open"
           class="mx-auto size-10 text-primary/50"
         />
 
-        <p class="mt-5">
-          В этой категории материалы скоро появятся.
-        </p>
+        <p class="mt-4">В этой категории материалы скоро появятся.</p>
       </div>
-    </section>
 
-    <!-- =========================================
-         TEST NOTICE
-    ========================================== -->
-    <section class="section">
       <div
-        class="flex flex-col gap-6
-               rounded-3xl
-               border border-blue-300/15
-               bg-bg/60
-               p-7 backdrop-blur-xl
-               md:flex-row md:items-center
-               md:p-9"
+        class="flex flex-col gap-6 rounded-3xl border card md:flex-row md:items-center"
       >
-        <div
-          class="icon size-14 shrink-0"
-        >
-          <Icon
-            name="tabler:info-circle"
-            class="size-7"
-          />
+        <div class="icon size-14 shrink-0">
+          <Icon name="tabler:info-circle" class="size-7" />
         </div>
 
         <div>
-          <h3 class="!text-lg font-semibold">
-            О тестах на сайте
-          </h3>
+          <h3>О тестах на сайте</h3>
 
-          <p
-            class="mt-2 !text-sm
-                   leading-[1.7]
-                   text-text-muted/65"
-          >
-            Онлайн-тесты предназначены для самооценки и
-            ориентирования в ситуации. Их результаты сами по себе
-            не являются медицинским или психиатрическим диагнозом
-            и не заменяют очную профессиональную оценку.
+          <p class="text-sm text-text-muted/65">
+            Онлайн-тесты предназначены для самооценки и ориентирования в
+            ситуации. Их результаты сами по себе не являются медицинским или
+            психиатрическим диагнозом и не заменяют очную профессиональную
+            оценку.
           </p>
         </div>
       </div>
@@ -593,6 +333,7 @@ const typeIcons: Record<MaterialType, string> = {
 </template>
 
 <style scoped>
+.material-move,
 .materials-enter-active,
 .materials-leave-active {
   transition:
@@ -605,4 +346,8 @@ const typeIcons: Record<MaterialType, string> = {
   opacity: 0;
   transform: translateY(8px);
 }
-</style>        
+
+.materials-leave-active {
+  position: absolute;
+}
+</style>
