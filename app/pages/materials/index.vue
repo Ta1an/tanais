@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Eyebrow from "~/components/shared/eyebrow.vue";
+import { motion, AnimatePresence } from "motion-v";
 
 useSeoMeta({
   title: "Материалы — TANAIS",
@@ -138,87 +139,91 @@ const typeIcons: Record<MaterialType, string> = {
 </script>
 
 <template>
-  <div>
-    <!-- =========================================
+  <!-- =========================================
          HERO
     ========================================== -->
-    <section
-      class="section top-section grid grid-cols-1 items-center lg:grid-cols-2"
-    >
-      <!-- Left -->
-      <div class="flex flex-col gap-8">
-        <Eyebrow text="Материалы" />
+  <section
+    class="section top-section grid grid-cols-1 items-center lg:grid-cols-2"
+  >
+    <!-- Left -->
+    <div class="flex flex-col gap-8">
+      <Eyebrow text="Материалы" />
 
-        <h1>
-          Понять происходящее
-          <span class="gradient-text block"> немного глубже. </span>
-        </h1>
+      <h1>
+        Понять происходящее
+        <span class="gradient-text block"> немного глубже. </span>
+      </h1>
 
-        <p class="max-w-3xl">
-          Тесты для самооценки, видео, статьи и практические материалы о
-          зависимом поведении, тревоге, отношениях и работе с семьёй.
+      <p class="max-w-3xl">
+        Тесты для самооценки, видео, статьи и практические материалы о зависимом
+        поведении, тревоге, отношениях и работе с семьёй.
+      </p>
+    </div>
+
+    <!-- Right -->
+    <div class="hidden justify-end lg:flex">
+      <div class="max-w-md border-l border-primary/20 pl-8">
+        <Icon name="tabler:books" class="mb-5 size-9 text-primary" />
+
+        <p class="text-sm text-text-muted/65">
+          Материалы помогают лучше ориентироваться в теме, но не заменяют
+          индивидуальную оценку состояния и работу со специалистом.
         </p>
       </div>
+    </div>
+  </section>
 
-      <!-- Right -->
-      <div class="hidden justify-end lg:flex">
-        <div class="max-w-md border-l border-primary/20 pl-8">
-          <Icon name="tabler:books" class="mb-5 size-9 text-primary" />
-
-          <p class="text-sm text-text-muted/65">
-            Материалы помогают лучше ориентироваться в теме, но не заменяют
-            индивидуальную оценку состояния и работу со специалистом.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================
+  <!-- =========================================
          MATERIALS
     ========================================== -->
-    <section class="section flex flex-col gap-10">
-      <div
-        class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+  <section class="section flex flex-col gap-10">
+    <div
+      class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+    >
+      <Eyebrow text="Библиотека материалов" />
+
+      <span class="text-sm text-text-muted/50">
+        {{ filteredMaterials.length }}
+        {{ filteredMaterials.length === 1 ? "материал" : "материалов" }}
+      </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
+      <button
+        v-for="filter in filters"
+        :key="filter.value"
+        type="button"
+        class="group flex items-center gap-2 rounded-xl border px-5 py-2 transition-all duration-300"
+        :class="
+          activeFilter === filter.value
+            ? 'border-primary/40 bg-primary/10 text-primary shadow-(--glow-s)'
+            : 'border-border/15 bg-bg/60 text-text-muted hover:border-primary/25 hover:bg-bg'
+        "
+        @click="activeFilter = filter.value"
       >
-        <Eyebrow text="Библиотека материалов" />
+        <Icon :name="filter.icon" class="size-6" />
 
-        <span class="text-sm text-text-muted/50">
-          {{ filteredMaterials.length }}
-          {{ filteredMaterials.length === 1 ? "материал" : "материалов" }}
+        <span class="font-medium">
+          {{ filter.label }}
         </span>
-      </div>
-
-      <div class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
-        <button
-          v-for="filter in filters"
-          :key="filter.value"
-          type="button"
-          class="group flex items-center gap-2 rounded-xl border px-5 py-2 transition-all duration-300"
-          :class="
-            activeFilter === filter.value
-              ? 'border-primary/40 bg-primary/10 text-primary shadow-(--glow-s)'
-              : 'border-border/15 bg-bg/60 text-text-muted hover:border-primary/25 hover:bg-bg'
-          "
-          @click="activeFilter = filter.value"
-        >
-          <Icon :name="filter.icon" class="size-6" />
-
-          <span class="font-medium">
-            {{ filter.label }}
-          </span>
-        </button>
-      </div>
-
-      <TransitionGroup
-        name="materials"
-        tag="div"
+      </button>
+    </div>
+    <AnimatePresence mode="wait" :initial="false">
+      <motion.div
+        :key="activeFilter"
         class="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+        :initial="{ opacity: 0, y: 12 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :exit="{ opacity: 0, y: -12 }"
+        :transition="{
+          duration: 0.25,
+          ease: 'easeInOut',
+        }"
       >
         <NuxtLink
           v-for="material in filteredMaterials"
-          :key="material.to"
           :to="material.to"
-          class="group card card-hover flex flex-col"
+          class="group card card-hover grid h-full grid-rows-[auto_auto_1fr_auto_auto]"
         >
           <!-- Header -->
           <div class="flex items-start justify-between gap-5">
@@ -245,16 +250,16 @@ const typeIcons: Record<MaterialType, string> = {
           </div>
 
           <!-- Content -->
-          <h3 class="mt-3 text-xl font-semibold leading-snug">
+          <h4 class="mt-3">
             {{ material.title }}
-          </h3>
+          </h4>
 
-          <p class="mt-4 text-sm leading-[1.7] text-text-muted/70">
+          <p class="mt-4 text-sm text-text-muted/70">
             {{ material.description }}
           </p>
 
           <!-- Footer -->
-          <div class="mt-auto flex items-end justify-between gap-5 pt-8">
+          <div class="flex items-end justify-between gap-5 pt-8">
             <span class="text-xs text-text-muted/45">
               {{ material.meta }}
             </span>
@@ -281,55 +286,51 @@ const typeIcons: Record<MaterialType, string> = {
             </div>
           </div>
         </NuxtLink>
-      </TransitionGroup>
+      </motion.div>
+    </AnimatePresence>
 
-      <!-- Empty -->
-      <div v-if="!filteredMaterials.length" class="card p-12 text-center">
-        <Icon
-          name="tabler:folder-open"
-          class="mx-auto size-10 text-primary/50"
-        />
+    <!-- Empty -->
+    <div v-if="!filteredMaterials.length" class="card p-12 text-center">
+      <Icon name="tabler:folder-open" class="mx-auto size-10 text-primary/50" />
 
-        <p class="mt-4">В этой категории материалы скоро появятся.</p>
+      <p class="mt-4">В этой категории материалы скоро появятся.</p>
+    </div>
+
+    <div
+      class="flex flex-col gap-6 rounded-3xl border card md:flex-row md:items-center"
+    >
+      <div class="icon size-14 shrink-0">
+        <Icon name="tabler:info-circle" class="size-7" />
       </div>
 
-      <div
-        class="flex flex-col gap-6 rounded-3xl border card md:flex-row md:items-center"
-      >
-        <div class="icon size-14 shrink-0">
-          <Icon name="tabler:info-circle" class="size-7" />
-        </div>
+      <div>
+        <h3>О тестах на сайте</h3>
 
-        <div>
-          <h3>О тестах на сайте</h3>
-
-          <p class="text-sm text-text-muted/65">
-            Онлайн-тесты предназначены для самооценки и ориентирования в
-            ситуации. Их результаты сами по себе не являются медицинским или
-            психиатрическим диагнозом и не заменяют очную профессиональную
-            оценку.
-          </p>
-        </div>
+        <p class="text-sm text-text-muted/65">
+          Онлайн-тесты предназначены для самооценки и ориентирования в ситуации.
+          Их результаты сами по себе не являются медицинским или психиатрическим
+          диагнозом и не заменяют очную профессиональную оценку.
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- =========================================
+  <!-- =========================================
          CTA
     ========================================== -->
-    <SharedCtaSection
-      title="Остались вопросы после"
-      gradient-title="изучения материалов?"
-      text="Информация помогает лучше понять ситуацию, но не всегда даёт ответ, что делать именно в вашем случае. Это можно разобрать на индивидуальной встрече."
-      :primary-button="{
-        text: 'Обсудить ситуацию',
-        icon: 'tabler:message-circle',
-      }"
-      :secondary-button="{
-        text: 'Посмотреть направления',
-        to: '/directions',
-      }"
-    />
-  </div>
+  <SharedCtaSection
+    title="Остались вопросы после"
+    gradient-title="изучения материалов?"
+    text="Информация помогает лучше понять ситуацию, но не всегда даёт ответ, что делать именно в вашем случае. Это можно разобрать на индивидуальной встрече."
+    :primary-button="{
+      text: 'Обсудить ситуацию',
+      icon: 'tabler:message-circle',
+    }"
+    :secondary-button="{
+      text: 'Посмотреть направления',
+      to: '/directions',
+    }"
+  />
 </template>
 
 <style scoped>
