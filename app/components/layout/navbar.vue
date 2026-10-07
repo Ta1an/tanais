@@ -114,7 +114,7 @@ watch(
       </span>
     </NuxtLink>
 
-    <nav class="hidden lg:flex gap-6 items-center">
+    <nav class="hidden xl:flex gap-6 items-center">
       <div v-for="item in navItems" :key="item.label" class="group relative">
         <template v-if="item.children">
           <NuxtLink
@@ -201,7 +201,7 @@ watch(
     <!-- ======================================
            CTA
       ======================================= -->
-    <div class="hidden lg:block">
+    <div class="hidden xl:block">
       <NuxtLink to="/contacts" class="button button-primary translate-0">
         Записаться
       </NuxtLink>
@@ -212,7 +212,7 @@ watch(
       ======================================= -->
     <button
       type="button"
-      class="flex size-11 items-center justify-center rounded-full border border-border/30 text-xl transition-colors hover:border-primary/30 lg:hidden"
+      class="flex size-11 items-center justify-center rounded-full border border-border/30 text-xl transition-colors hover:border-primary/30 xl:hidden"
       :aria-expanded="isMenuOpen"
       aria-label="Открыть меню"
       @click="isMenuOpen = !isMenuOpen"

@@ -201,7 +201,7 @@ const signatureVariants = {
 
       <!-- Main photo -->
       <motion.div
-        class="relative z-2 w-[92%] overflow-hidden rounded-3xl border border-border/20 shadow-(--glow-m)"
+        class="relative z-2 overflow-hidden rounded-3xl border border-border/20 shadow-(--glow-m)"
         :variants="imageVariants"
         initial="hidden"
         animate="visible"
