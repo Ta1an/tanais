@@ -26,7 +26,7 @@ type Material = {
   type: MaterialType;
   category: string;
   icon: string;
-  to: string;
+  to?: string;
   meta?: string;
   featured?: boolean;
 };
@@ -302,7 +302,6 @@ const sideLineVariants = {
           <NuxtLink
             v-for="material in filteredMaterials"
             :key="material.to"
-            :to="material.to"
             class="group card card-hover grid h-full grid-rows-[auto_auto_1fr_auto_auto]"
           >
             <!-- Header -->
