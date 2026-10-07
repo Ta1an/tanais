@@ -3,12 +3,7 @@ import { motion } from "motion-v";
 
 import Eyebrow from "../shared/eyebrow.vue";
 
-import {
-  fadeUp,
-  motionDuration,
-  motionEase,
-  stagger,
-} from "~/utils/motion";
+import { fadeUp, motionDuration, motionEase, stagger } from "~/utils/motion";
 
 const imageVariants = {
   hidden: {
@@ -65,6 +60,10 @@ const lineVariants = {
     },
   },
 };
+
+const config = useRuntimeConfig();
+
+const aboutImage = `${config.app.baseURL}images/about.jpg`;
 </script>
 
 <template>
@@ -84,49 +83,29 @@ const lineVariants = {
         <Eyebrow text="О центре" />
       </motion.div>
 
-      <motion.h1
-        class="max-w-180"
-        :variants="fadeUp"
-      >
+      <motion.h1 class="max-w-180" :variants="fadeUp">
         TANAIS —
 
-        <span class="gradient-text">
-          пространство для понимания
-        </span>
+        <span class="gradient-text"> пространство для понимания </span>
 
         и изменений.
       </motion.h1>
 
-      <motion.p
-        class="max-w-3xl"
-        :variants="fadeUp"
-      >
+      <motion.p class="max-w-3xl" :variants="fadeUp">
         Мы работаем с зависимым поведением, тревожными состояниями,
         созависимостью, семейными и личностными кризисами. В центре внимания —
         не только симптом, а система процессов, которая поддерживает состояние.
       </motion.p>
 
       <!-- Actions -->
-      <motion.div
-        class="flex flex-wrap gap-3"
-        :variants="fadeUp"
-      >
-        <NuxtLink
-          to="/directions"
-          class="button button-primary"
-        >
+      <motion.div class="flex flex-wrap gap-3" :variants="fadeUp">
+        <NuxtLink to="/directions" class="button button-primary">
           Направления работы
 
-          <Icon
-            name="tabler:arrow-right"
-            class="size-5"
-          />
+          <Icon name="tabler:arrow-right" class="size-5" />
         </NuxtLink>
 
-        <NuxtLink
-          to="/contacts"
-          class="button button-outline"
-        >
+        <NuxtLink to="/contacts" class="button button-outline">
           Связаться с центром
         </NuxtLink>
       </motion.div>
@@ -136,38 +115,20 @@ const lineVariants = {
         class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text-muted/65"
         :variants="stagger(0.07)"
       >
-        <motion.span
-          class="flex items-center gap-2"
-          :variants="fadeUp"
-        >
-          <Icon
-            name="tabler:award"
-            class="size-4 text-primary"
-          />
+        <motion.span class="flex items-center gap-2" :variants="fadeUp">
+          <Icon name="tabler:award" class="size-4 text-primary" />
 
           20 лет практики
         </motion.span>
 
-        <motion.span
-          class="flex items-center gap-2"
-          :variants="fadeUp"
-        >
-          <Icon
-            name="tabler:users-group"
-            class="size-4 text-primary"
-          />
+        <motion.span class="flex items-center gap-2" :variants="fadeUp">
+          <Icon name="tabler:users-group" class="size-4 text-primary" />
 
           Командный подход
         </motion.span>
 
-        <motion.span
-          class="flex items-center gap-2"
-          :variants="fadeUp"
-        >
-          <Icon
-            name="tabler:lock"
-            class="size-4 text-primary"
-          />
+        <motion.span class="flex items-center gap-2" :variants="fadeUp">
+          <Icon name="tabler:lock" class="size-4 text-primary" />
 
           Конфиденциально
         </motion.span>
@@ -185,7 +146,7 @@ const lineVariants = {
     >
       <!-- Image -->
       <motion.img
-        src="/img/about.jpg"
+        :src="aboutImage"
         alt="Команда центра TANAIS"
         class="col-[1/2] row-[1/2] size-full object-cover object-center"
         :initial="{
