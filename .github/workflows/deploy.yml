@@ -27,7 +27,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -37,14 +37,6 @@ jobs:
         run: npx nuxt build --preset github_pages
         env:
           NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: .output/public
 
   deploy:
     environment:
