@@ -124,7 +124,7 @@ const mechanismArrows = [
     <div class="grid items-center gap-8 lg:grid-cols-2">
       <!-- Left -->
       <motion.div
-        class="flex flex-col gap-8"
+        class="flex flex-col gap-6 sm:gap-8"
         :variants="stagger(0.1)"
         initial="hidden"
         while-in-view="visible"
@@ -134,7 +134,7 @@ const mechanismArrows = [
           <Eyebrow text="Как мы понимаем проблему" />
         </motion.div>
 
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-3 sm:gap-4">
           <motion.h2 :variants="fadeUp">
             Проблема держится
 
@@ -322,7 +322,7 @@ const mechanismArrows = [
 
       <!-- Mobile -->
       <motion.div
-        class="grid grid-cols-2 gap-4 lg:hidden"
+        class="grid gap-3 grid-cols-2 text-center sm:gap-4 lg:hidden"
         :variants="stagger(0.07)"
         initial="hidden"
         while-in-view="visible"
@@ -334,7 +334,10 @@ const mechanismArrows = [
           class="card flex flex-col items-center justify-center"
           :variants="fadeUp"
         >
-          <Icon :name="item.icon" class="mb-3 size-8 text-primary" />
+          <Icon
+            :name="item.icon"
+            class="mb-2 size-7 text-primary sm:mb-3 sm:size-8"
+          />
 
           <span class="text-sm font-medium text-text">
             {{ item.title }}

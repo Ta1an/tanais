@@ -25,7 +25,7 @@ const directions = [
     subtitle: "Родственники · контроль · спасательство · границы",
     description:
       "Помогаем близким выйти из постоянного контроля и спасательства, восстановить границы и перестать жить вокруг зависимости другого человека.",
-    icon: "lucide:heart-handshake",
+    icon: "tabler:heart-handshake",
     to: "/directions/codependency",
     tags: ["Родственники", "Гиперконтроль", "Границы"],
   },
@@ -83,9 +83,9 @@ const horizontalLineVariants = {
 <template>
   <section id="directions" class="section flex flex-col gap-10">
     <!-- Header -->
-    <div class="grid lg:grid-cols-[1fr_auto]">
+    <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:gap-12">
       <motion.div
-        class="flex flex-col gap-8"
+        class="flex flex-col gap-6 sm:gap-8"
         :variants="stagger(0.1)"
         initial="hidden"
         while-in-view="visible"
@@ -151,40 +151,40 @@ const horizontalLineVariants = {
       >
         <NuxtLink
           :to="direction.to"
-          class="group card card-hover relative grid h-full gap-4 overflow-hidden"
+          class="group card card-hover relative grid grid-cols-[1fr_auto] h-full gap-4 overflow-hidden"
         >
           <div
             class="glow-blue -right-16 -top-16 size-56 transition-all duration-500 group-hover:scale-125 group-hover:bg-violet-500/15"
           />
 
-          <h3 class="row-start-1 col-start-1 self-center">
+          <h3 class="self-center">
             {{ direction.title }}
           </h3>
 
           <div
-            class="relative row-start-1 col-start-1 flex size-24 shrink-0 items-center justify-center justify-self-end rounded-full border border-blue-400/10 bg-blue-500/5 text-primary shadow-[0_0_40px_rgb(14_165_233/0.08)] transition-all duration-500 group-hover:scale-105 group-hover:border-violet-400/20 group-hover:text-violet-400 md:size-28"
+            class="relative flex size-20 shrink-0 items-center justify-center justify-self-end rounded-full border border-blue-400/10 bg-blue-500/5 text-primary shadow-[0_0_40px_rgb(14_165_233/0.08)] transition-all duration-500 sm:size-22 md:size-26 lg:size-28 group-hover:scale-105 group-hover:border-violet-400/20 group-hover:text-violet-400"
           >
             <div
-              class="absolute inset-3 rounded-full border border-blue-400/8"
+              class="absolute inset-2 rounded-full border border-blue-400/8"
             />
 
             <Icon
               :name="direction.icon"
-              class="relative z-10 size-11 md:size-12"
+              class="relative z-10 size-10 md:size-12 lg:size-14"
             />
           </div>
 
           <div
-            class="text-sm font-medium uppercase tracking-[0.16em] text-primary"
+            class="col-span-2 text-xs font-medium uppercase leading-relaxed tracking-widest text-primary sm:text-sm sm:tracking-[0.16em]"
           >
             {{ direction.subtitle }}
           </div>
 
-          <p class="max-w-[90%] text-text-muted/70">
+          <p class="col-span-2 text-text-muted/70">
             {{ direction.description }}
           </p>
 
-          <div class="flex flex-wrap gap-2">
+          <div class="col-span-2 flex flex-wrap gap-2">
             <span
               v-for="tag in direction.tags"
               :key="tag"
@@ -198,7 +198,7 @@ const horizontalLineVariants = {
             Подробнее
 
             <Icon
-              name="lucide:arrow-right"
+              name="tabler:arrow-right"
               class="size-4 transition-transform duration-300 group-hover:translate-x-1.5"
             />
           </div>
@@ -206,11 +206,11 @@ const horizontalLineVariants = {
       </motion.div>
 
       <motion.div
-        class="card grid items-center gap-x-5 md:grid-flow-col md:grid-cols-[auto_1fr_auto] lg:col-span-2"
+        class="card grid gap-3 md:grid-flow-col md:grid-cols-[auto_1fr_auto] md:items-center md:gap-x-5 md:gap-y-0 lg:col-span-2"
         :variants="fadeUp"
       >
         <div class="icon row-span-2 hidden size-12 md:flex">
-          <Icon name="lucide:plus" class="size-5" />
+          <Icon name="tabler:plus" class="size-5" />
         </div>
 
         <h4>Работаем и с другими формами зависимости</h4>
@@ -221,10 +221,10 @@ const horizontalLineVariants = {
 
         <NuxtLink
           to="/directions/addictions"
-          class="flex shrink-0 items-center gap-2 self-center text-sm font-medium text-primary transition-colors hover:text-violet-400 md:row-span-2"
+          class="flex shrink-0 items-center gap-2 justify-self-start text-sm font-medium text-primary transition-colors hover:text-violet-400 md:row-span-2 md:self-center"
         >
           Подробнее
-          <Icon name="lucide:arrow-right" class="size-4" />
+          <Icon name="tabler:arrow-right" class="size-4" />
         </NuxtLink>
       </motion.div>
     </motion.div>
@@ -238,7 +238,7 @@ const horizontalLineVariants = {
       :in-view-options="motionViewport.late"
     >
       <div class="icon rounded-full shadow-(--glow-s)">
-        <Icon name="lucide:message-circle-more" class="size-7" />
+        <Icon name="tabler:message-circle" class="size-7" />
       </div>
 
       <div class="flex-1">
@@ -255,7 +255,7 @@ const horizontalLineVariants = {
         class="button button-primary w-full shrink-0 lg:w-auto"
       >
         Обсудить ситуацию
-        <Icon name="lucide:arrow-right" class="size-4" />
+        <Icon name="tabler:arrow-right" class="size-4" />
       </NuxtLink>
     </motion.div>
   </section>

@@ -280,7 +280,7 @@ const directionIconVariants = {
         >
           <div class="icon row-span-2 hidden size-12 md:flex">
             <Icon
-              name="lucide:plus"
+              name="tabler:plus"
               class="size-5"
             />
           </div>
@@ -300,7 +300,7 @@ const directionIconVariants = {
             Подробнее о зависимостях
 
             <Icon
-              name="lucide:arrow-right"
+              name="tabler:arrow-right"
               class="size-4"
             />
           </NuxtLink>

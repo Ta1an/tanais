@@ -89,11 +89,11 @@ const signatureVariants = {
 
 <template>
   <section
-    class="relative grid lg:grid-cols-2 min-h-svh items-center section top-section"
+    class="relative grid grid-cols-1 lg:grid-cols-2 min-h-svh items-center section top-section"
   >
     <!-- Left -->
     <motion.div
-      class="flex flex-col gap-8"
+      class="flex flex-col gap-6 sm:gap-8"
       :variants="stagger(0.1, 0.1)"
       initial="hidden"
       animate="visible"
@@ -102,20 +102,23 @@ const signatureVariants = {
         <Eyebrow text="центр психологической помощи" />
       </motion.div>
 
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-3 sm:gap-4">
         <motion.h1 :variants="fadeUp">
           Понять себя.
 
           <span class="gradient-text block"> Изменить жизнь. </span>
         </motion.h1>
 
-        <motion.p :variants="fadeUp" class="max-w-200">
+        <motion.p :variants="fadeUp" class="max-w-xl">
           Помогаем разобраться в причинах состояния, увидеть механизм проблемы и
           выстроить персональный путь изменений.
         </motion.p>
       </div>
 
-      <motion.div :variants="fadeUp" class="flex flex-wrap gap-4">
+      <motion.div
+        :variants="fadeUp"
+        class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4"
+      >
         <NuxtLink to="/contacts" class="button button-primary">
           Записаться на консультацию
         </NuxtLink>
@@ -123,11 +126,14 @@ const signatureVariants = {
         <a href="#process" class="button button-outline"> Как мы работаем </a>
       </motion.div>
 
-      <motion.div :variants="fadeUp" class="flex flex-wrap gap-4">
+      <motion.div
+        :variants="fadeUp"
+        class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4"
+      >
         <span
           v-for="item in check"
           :key="item"
-          class="inline-flex items-center justify-center gap-2"
+          class="inline-flex items-center gap-2"
         >
           <div
             class="icon size-8 rounded-full border-emerald-800 bg-emerald-400/5 text-emerald-400"
@@ -239,7 +245,7 @@ const signatureVariants = {
 
     <!-- Bottom detail -->
     <motion.div
-      class="col-span-2 self-center justify-self-center pt-5 text-xs uppercase tracking-[0.4em] text-white/25"
+      class="justify-self-center pt-5 text-center text-[10px] uppercase tracking-[0.2em] text-white/25 sm:text-xs sm:tracking-[0.3em] lg:col-span-2 lg:tracking-[0.4em]"
       :initial="{ opacity: 0 }"
       :animate="{ opacity: 1 }"
       :transition="{

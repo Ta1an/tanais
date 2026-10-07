@@ -88,7 +88,7 @@ watch(
 
 <template>
   <header
-    class="fixed left-0 right-0 top-0 z-50 mx-5 my-4 md:mx-[10%] flex items-center justify-between rounded-3xl border border-border/20 bg-bg/85 px-6 py-2 shadow-s backdrop-blur-xl"
+    class="fixed left-0 right-0 top-0 z-50 mx-4 md:mx-[8%] lg:mx-[10%] flex items-center justify-between my-4 rounded-2xl md:rounded-3xl border border-border/20 bg-bg/85 px-6 py-2 shadow-s backdrop-blur-xl"
   >
     <NuxtLink
       to="/"
@@ -98,16 +98,18 @@ watch(
       <img
         src="/img/logo.png"
         alt="TANAIS"
-        class="row-span-2 size-16 object-contain"
+        class="row-span-2 size-14 object-contain"
       />
 
       <span
-        class="gradient-text self-end text-lg font-semibold uppercase tracking-[0.2em] md:text-xl"
+        class="gradient-text self-end text-base sm:text-lg font-semibold uppercase tracking-[0.2em] md:text-xl"
       >
         TANAIS
       </span>
 
-      <span class="self-start whitespace-nowrap text-xs text-text-muted">
+      <span
+        class="self-start whitespace-nowrap text-[10px] sm:text-xs text-text-muted"
+      >
         Центр психологической помощи
       </span>
     </NuxtLink>
@@ -200,10 +202,7 @@ watch(
            CTA
       ======================================= -->
     <div class="hidden lg:block">
-      <NuxtLink
-        to="/contacts"
-        class="button button-primary translate-0"
-      >
+      <NuxtLink to="/contacts" class="button button-primary translate-0">
         Записаться
       </NuxtLink>
     </div>
@@ -234,7 +233,7 @@ watch(
     <Transition name="menu">
       <nav
         v-if="isMenuOpen"
-        class="fixed top-[calc(100%+8px)] left-0 right-0 overflow-hidden rounded-3xl border border-border/20 bg-bg/95 p-3 shadow-m backdrop-blur-2xl xl:hidden"
+        class="absolute left-0 right-0 top-[calc(100%+8px)] max-h-[calc(100dvh-100px)] overflow-y-auto rounded-2xl border border-border/20 bg-bg/95 p-3 shadow-m backdrop-blur-2xl sm:rounded-3xl lg:hidden"
       >
         <div class="flex flex-col" v-for="item in navItems" :key="item.label">
           <!-- Mobile item with children -->

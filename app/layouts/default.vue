@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { motion, AnimatePresence } from "motion-v";
+import { motion } from "motion-v";
 const route = useRoute();
 </script>
 <template>
