@@ -63,7 +63,7 @@ const lineVariants = {
 
 const config = useRuntimeConfig();
 
-const aboutImage = `${config.app.baseURL}images/about.jpg`;
+const aboutImage = `${config.app.baseURL}img/about.jpg`;
 </script>
 
 <template>
