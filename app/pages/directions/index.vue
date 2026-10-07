@@ -1,5 +1,17 @@
 <script setup lang="ts">
+import { motion } from "motion-v";
+
 import Eyebrow from "~/components/shared/eyebrow.vue";
+
+import {
+  fadeLeft,
+  fadeScale,
+  fadeUp,
+  motionDuration,
+  motionEase,
+  motionViewport,
+  stagger,
+} from "~/utils/motion";
 
 useSeoMeta({
   title: "Направления работы — TANAIS",
@@ -29,160 +41,288 @@ const directions = [
     tags: ["Родственники", "Гиперконтроль", "Границы", "Спасательство"],
   },
 ];
+
+const sideLineVariants = {
+  hidden: {
+    opacity: 0,
+    scaleY: 0,
+  },
+
+  visible: {
+    opacity: 1,
+    scaleY: 1,
+
+    transition: {
+      duration: motionDuration.slow,
+      delay: 0.25,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+const directionIconVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+
+    transition: {
+      duration: motionDuration.normal,
+      ease: motionEase.smooth,
+    },
+  },
+};
 </script>
 
 <template>
-  <!-- =========================================
-       HERO
-  ========================================== -->
-  <section
-    class="section relative grid grid-cols-1 items-center top-section lg:grid-cols-2"
-  >
-    <!-- Left -->
-    <div>
-      <Eyebrow text="Направления" />
-
-      <h1 class="mt-8 mb-4">
-        Разные состояния.
-        <span class="gradient-text block"> Разные механизмы. </span>
-      </h1>
-
-      <p class="max-w-3xl">
-        Мы не подбираем помощь только по названию проблемы. Важно понять, что
-        поддерживает зависимое поведение, как формируется повторяющийся цикл и
-        какую роль в нём играет окружение человека.
-      </p>
-    </div>
-
-    <!-- Right -->
-    <div class="hidden lg:flex lg:justify-end">
-      <div class="max-w-sm border-l border-primary/20 pl-8">
-        <Icon name="tabler:route" class="mb-5 size-8 text-primary" />
-
-        <p class="text-sm text-text-muted/65">
-          Основной фокус TANAIS — игровая зависимость и созависимость. При этом
-          мы рассматриваем не только поведение самого человека, но и систему
-          отношений вокруг него.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================
-       KEY DIRECTIONS
-  ========================================== -->
-  <section class="section flex flex-col gap-10">
-    <div class="grid gap-8 lg:grid-cols-2">
-      <div>
-        <Eyebrow text="Ключевая специализация" />
-
-        <h2 class="mt-8">
-          Основной фокус
-          <span class="gradient-text"> TANAIS </span>
-        </h2>
-      </div>
-
-      <p class="max-w-xl lg:place-self-end">
-        Зависимость редко существует изолированно. Поэтому мы отдельно работаем
-        как с игровым поведением самого человека, так и с близкими, которые
-        оказываются вовлечены в зависимый цикл.
-      </p>
-    </div>
-
-    <!-- Cards -->
-    <div class="grid gap-4 lg:grid-cols-2">
-      <NuxtLink
-        v-for="direction in directions"
-        :key="direction.title"
-        :to="direction.to"
-        class="group card card-hover relative flex flex-col overflow-hidden"
+  <div>
+    <!-- =========================================
+         HERO
+    ========================================== -->
+    <section
+      class="section top-section relative grid grid-cols-1 items-center lg:grid-cols-2"
+    >
+      <!-- Left -->
+      <motion.div
+        :variants="stagger(0.1, 0.1)"
+        initial="hidden"
+        animate="visible"
       >
-        <div
-          class="icon size-20 shrink-0 transition-all duration-500 group-hover:border-violet-400/30 group-hover:text-violet-400"
+        <motion.div :variants="fadeUp">
+          <Eyebrow text="Направления" />
+        </motion.div>
+
+        <motion.h1
+          class="mb-4 mt-8"
+          :variants="fadeUp"
         >
-          <Icon :name="direction.icon" class="size-11" />
-        </div>
+          Разные состояния.
 
-        <!-- Content -->
-        <div
-          class="mt-8 text-xs font-medium uppercase tracking-[0.18em] text-primary"
-        >
-          {{ direction.subtitle }}
-        </div>
-
-        <h3>
-          {{ direction.title }}
-        </h3>
-
-        <p class="mt-5 text-base leading-[1.75] text-text-muted/70">
-          {{ direction.description }}
-        </p>
-
-        <!-- Tags -->
-        <div class="mt-6 flex flex-wrap gap-2">
-          <span
-            v-for="tag in direction.tags"
-            :key="tag"
-            class="rounded-full border border-border/10 bg-white/3 px-3 py-1.5 text-xs text-text-muted/60"
-          >
-            {{ tag }}
+          <span class="gradient-text block">
+            Разные механизмы.
           </span>
-        </div>
+        </motion.h1>
 
-        <!-- Link -->
-        <div
-          class="mt-auto flex items-center gap-2 pt-10 text-sm font-medium text-primary"
+        <motion.p
+          class="max-w-3xl"
+          :variants="fadeUp"
         >
-          Подробнее
+          Мы не подбираем помощь только по названию проблемы. Важно понять, что
+          поддерживает зависимое поведение, как формируется повторяющийся цикл и
+          какую роль в нём играет окружение человека.
+        </motion.p>
+      </motion.div>
 
-          <Icon
-            name="tabler:arrow-right"
-            class="size-5 transition-transform duration-300 group-hover:translate-x-1.5"
-          />
-        </div>
-      </NuxtLink>
-
-      <div
-        class="grid md:grid-cols-[auto_1fr_auto] md:grid-flow-col items-center gap-x-5 card lg:col-span-2"
+      <!-- Right -->
+      <motion.div
+        class="hidden lg:flex lg:justify-end"
+        initial="hidden"
+        animate="visible"
+        :variants="fadeLeft"
       >
-        <div class="icon size-12 hidden md:flex row-span-2">
-          <Icon name="lucide:plus" class="size-5" />
+        <div class="relative max-w-sm pl-8">
+          <!-- Vertical line -->
+          <motion.div
+            class="absolute bottom-0 left-0 top-0 w-px origin-top bg-linear-to-b from-primary/40 to-primary/5"
+            :variants="sideLineVariants"
+          />
+
+          <motion.div
+            :variants="stagger(0.1, 0.25)"
+          >
+            <motion.div :variants="fadeUp">
+              <Icon
+                name="tabler:route"
+                class="mb-5 size-8 text-primary"
+              />
+            </motion.div>
+
+            <motion.p
+              class="text-sm text-text-muted/65"
+              :variants="fadeUp"
+            >
+              Основной фокус TANAIS — игровая зависимость и созависимость. При
+              этом мы рассматриваем не только поведение самого человека, но и
+              систему отношений вокруг него.
+            </motion.p>
+          </motion.div>
         </div>
+      </motion.div>
+    </section>
 
-        <h4>Другие формы зависимого поведения</h4>
-
-        <p class="text-sm text-text-muted/55">
-          Алкогольная, наркотическая и другие формы зависимого поведения.
-        </p>
-
-        <NuxtLink
-          to="/directions/addictions"
-          class="self-center md:row-span-2 flex shrink-0 items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-violet-400"
+    <!-- =========================================
+         KEY DIRECTIONS
+    ========================================== -->
+    <section class="section flex flex-col gap-10">
+      <!-- Header -->
+      <motion.div
+        class="grid gap-8 lg:grid-cols-2"
+        :variants="stagger(0.1)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.medium"
+      >
+        <motion.div
+          :variants="stagger(0.1)"
         >
-          Подробнее о зависимостях
+          <motion.div :variants="fadeUp">
+            <Eyebrow text="Ключевая специализация" />
+          </motion.div>
 
-          <Icon name="lucide:arrow-right" class="size-4" />
-        </NuxtLink>
-      </div>
-    </div>
+          <motion.h2
+            class="mt-8"
+            :variants="fadeUp"
+          >
+            Основной фокус
 
-    <!-- Other addictions -->
-  </section>
+            <span class="gradient-text">
+              TANAIS
+            </span>
+          </motion.h2>
+        </motion.div>
 
-  <!-- =========================================
-       CTA
-  ========================================== -->
-  <SharedCtaSection
-    title="Не уверены, с чего"
-    gradient-title="начать именно вам?"
-    text="Расскажите, что происходит. На первичном разборе можно определить, что поддерживает ситуацию и какой следующий шаг имеет смысл."
-    :primary-button="{
-      text: 'Рассказать о ситуации',
-      icon: 'tabler:arrow-right',
-    }"
-    :secondary-button="{
-      text: 'О первичном разборе',
-      to: '/about#diagnostics',
-    }"
-  />
+        <motion.p
+          class="max-w-xl lg:place-self-end"
+          :variants="fadeUp"
+        >
+          Зависимость редко существует изолированно. Поэтому мы отдельно
+          работаем как с игровым поведением самого человека, так и с близкими,
+          которые оказываются вовлечены в зависимый цикл.
+        </motion.p>
+      </motion.div>
+
+      <!-- =========================================
+           CARDS
+      ========================================== -->
+      <motion.div
+        class="grid gap-4 lg:grid-cols-2"
+        :variants="stagger(0.12, 0.05)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.early"
+      >
+        <motion.div
+          v-for="direction in directions"
+          :key="direction.title"
+          class="h-full"
+          :variants="fadeScale"
+        >
+          <NuxtLink
+            :to="direction.to"
+            class="group card card-hover relative flex h-full flex-col overflow-hidden"
+          >
+            <!-- Number -->
+            <span
+              class="absolute right-7 top-7 text-sm font-medium tracking-[0.2em] text-primary/25"
+            >
+              {{ direction.number }}
+            </span>
+
+            <!-- Icon -->
+            <motion.div
+              class="icon size-20 shrink-0 transition-all duration-500 group-hover:border-violet-400/30 group-hover:text-violet-400"
+              :variants="directionIconVariants"
+            >
+              <Icon
+                :name="direction.icon"
+                class="size-11"
+              />
+            </motion.div>
+
+            <!-- Content -->
+            <div
+              class="mt-8 text-xs font-medium uppercase tracking-[0.18em] text-primary"
+            >
+              {{ direction.subtitle }}
+            </div>
+
+            <h3>
+              {{ direction.title }}
+            </h3>
+
+            <p class="mt-5 text-base leading-[1.75] text-text-muted/70">
+              {{ direction.description }}
+            </p>
+
+            <!-- Tags -->
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span
+                v-for="tag in direction.tags"
+                :key="tag"
+                class="rounded-full border border-border/10 bg-white/3 px-3 py-1.5 text-xs text-text-muted/60"
+              >
+                {{ tag }}
+              </span>
+            </div>
+
+            <!-- Link -->
+            <div
+              class="mt-auto flex items-center gap-2 pt-10 text-sm font-medium text-primary"
+            >
+              Подробнее
+
+              <Icon
+                name="tabler:arrow-right"
+                class="size-5 transition-transform duration-300 group-hover:translate-x-1.5"
+              />
+            </div>
+          </NuxtLink>
+        </motion.div>
+
+        <!-- Other addictions -->
+        <motion.div
+          class="card grid items-center gap-x-5 md:grid-flow-col md:grid-cols-[auto_1fr_auto] lg:col-span-2"
+          :variants="fadeUp"
+        >
+          <div class="icon row-span-2 hidden size-12 md:flex">
+            <Icon
+              name="lucide:plus"
+              class="size-5"
+            />
+          </div>
+
+          <h4>
+            Другие формы зависимого поведения
+          </h4>
+
+          <p class="text-sm text-text-muted/55">
+            Алкогольная, наркотическая и другие формы зависимого поведения.
+          </p>
+
+          <NuxtLink
+            to="/directions/addictions"
+            class="flex shrink-0 items-center gap-2 self-center text-sm font-medium text-primary transition-colors hover:text-violet-400 md:row-span-2"
+          >
+            Подробнее о зависимостях
+
+            <Icon
+              name="lucide:arrow-right"
+              class="size-4"
+            />
+          </NuxtLink>
+        </motion.div>
+      </motion.div>
+    </section>
+
+    <!-- =========================================
+         CTA
+    ========================================== -->
+    <SharedCtaSection
+      title="Не уверены, с чего"
+      gradient-title="начать именно вам?"
+      text="Расскажите, что происходит. На первичном разборе можно определить, что поддерживает ситуацию и какой следующий шаг имеет смысл."
+      :primary-button="{
+        text: 'Рассказать о ситуации',
+        icon: 'tabler:arrow-right',
+      }"
+      :secondary-button="{
+        text: 'О первичном разборе',
+        to: '/about#diagnostics',
+      }"
+    />
+  </div>
 </template>

@@ -1,5 +1,16 @@
 <script setup lang="ts">
+import { motion } from "motion-v";
+
 import Eyebrow from "../shared/eyebrow.vue";
+
+import {
+  fadeScale,
+  fadeUp,
+  motionDuration,
+  motionEase,
+  motionViewport,
+  stagger,
+} from "~/utils/motion";
 
 const diagnosticPoints = [
   {
@@ -33,41 +44,77 @@ const diagnosticPoints = [
     text: "Какие задачи приоритетны и с чего целесообразно начать дальнейшую работу.",
   },
 ];
+
+const numberVariants = {
+  hidden: {
+    opacity: 0,
+    x: -8,
+  },
+
+  visible: {
+    opacity: 1,
+    x: 0,
+
+    transition: {
+      duration: motionDuration.fast,
+      ease: motionEase.smooth,
+    },
+  },
+};
 </script>
 
 <template>
   <section id="diagnostics" class="section">
-    <div class="card rounded-4xl grid lg:grid-cols-[0.75fr_1.25fr]">
-      <!-- Left -->
-      <div
-        class="border-b border-blue-300/10 p-7 md:p-10 lg:border-b-0 lg:border-r lg:p-12 flex flex-col gap-8"
+    <motion.div
+      class="card grid overflow-hidden rounded-4xl lg:grid-cols-[0.75fr_1.25fr]"
+      :variants="fadeScale"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.medium"
+    >
+      <!-- =====================================
+           LEFT
+      ====================================== -->
+      <motion.div
+        class="flex flex-col gap-8 border-b border-blue-300/10 p-7 md:p-10 lg:border-b-0 lg:border-r lg:p-12"
+        :variants="stagger(0.1, 0.05)"
       >
-        <Eyebrow text="Первый этап" />
+        <motion.div :variants="fadeUp">
+          <Eyebrow text="Первый этап" />
+        </motion.div>
 
-        <h2>
+        <motion.h2 :variants="fadeUp">
           Первичный
-          <span class="gradient-text block"> разбор ситуации. </span>
-        </h2>
 
-        <p class="max-w-xl leading-relaxed">
+          <span class="gradient-text block"> разбор ситуации. </span>
+        </motion.h2>
+
+        <motion.p class="max-w-xl leading-relaxed" :variants="fadeUp">
           Это не попытка быстро присвоить человеку ярлык. Задача первой встречи
           — получить достаточно информации, чтобы понимать структуру проблемы и
           определить дальнейшие шаги.
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
-      <!-- Right -->
-      <div
-        class="grid gap-px bg-blue-300/10 md:grid-cols-2 rounded-r-2xl overflow-hidden"
+      <!-- =====================================
+           RIGHT
+      ====================================== -->
+      <motion.div
+        class="grid gap-px overflow-hidden bg-blue-300/10 md:grid-cols-2"
+        :variants="stagger(0.08, 0.15)"
       >
-        <article
+        <motion.article
           v-for="point in diagnosticPoints"
           :key="point.number"
-          class="bg-bg-dark/80 p-6 md:p-8"
+          class="relative bg-bg-dark/80 p-6 md:p-8"
+          :variants="fadeUp"
         >
-          <span class="text-lg font-medium tracking-[0.25em] text-primary">
+          <motion.span
+            class="text-lg font-medium tracking-[0.25em] text-primary"
+            :variants="numberVariants"
+          >
             {{ point.number }}
-          </span>
+          </motion.span>
 
           <h4>
             {{ point.title }}
@@ -76,8 +123,8 @@ const diagnosticPoints = [
           <p class="text-sm">
             {{ point.text }}
           </p>
-        </article>
-      </div>
-    </div>
+        </motion.article>
+      </motion.div>
+    </motion.div>
   </section>
 </template>

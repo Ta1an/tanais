@@ -1,77 +1,223 @@
 <script setup lang="ts">
+import { motion } from "motion-v";
+
 import Eyebrow from "../shared/eyebrow.vue";
+
+import {
+  fadeUp,
+  motionDuration,
+  motionEase,
+  stagger,
+} from "~/utils/motion";
+
+const imageVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.97,
+    x: 20,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+    x: 0,
+
+    transition: {
+      duration: motionDuration.slow,
+      delay: 0.2,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+const imageContentVariants = {
+  hidden: {
+    opacity: 0,
+    y: 14,
+  },
+
+  visible: {
+    opacity: 1,
+    y: 0,
+
+    transition: {
+      duration: motionDuration.normal,
+      delay: 0.55,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+const lineVariants = {
+  hidden: {
+    opacity: 0,
+    scaleX: 0,
+  },
+
+  visible: {
+    opacity: 1,
+    scaleX: 1,
+
+    transition: {
+      duration: motionDuration.normal,
+      delay: 0.45,
+      ease: motionEase.smooth,
+    },
+  },
+};
 </script>
 
 <template>
   <section
-    class="section grid min-h-svh grid-cols-1 items-center gap-10 lg:grid-cols-[0.75fr_1fr] top-section"
+    class="section top-section grid min-h-svh grid-cols-1 items-center gap-10 lg:grid-cols-[0.75fr_1fr]"
   >
-    <!-- Left -->
-    <div class="flex flex-col gap-8">
-      <Eyebrow text="О центре" />
+    <!-- =====================================
+         LEFT
+    ====================================== -->
+    <motion.div
+      class="flex flex-col gap-8"
+      :variants="stagger(0.1, 0.1)"
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div :variants="fadeUp">
+        <Eyebrow text="О центре" />
+      </motion.div>
 
-      <h1 class="max-w-180">
+      <motion.h1
+        class="max-w-180"
+        :variants="fadeUp"
+      >
         TANAIS —
-        <span class="gradient-text"> пространство для понимания </span>
-        и изменений.
-      </h1>
 
-      <p class="max-w-3xl">
+        <span class="gradient-text">
+          пространство для понимания
+        </span>
+
+        и изменений.
+      </motion.h1>
+
+      <motion.p
+        class="max-w-3xl"
+        :variants="fadeUp"
+      >
         Мы работаем с зависимым поведением, тревожными состояниями,
         созависимостью, семейными и личностными кризисами. В центре внимания —
         не только симптом, а система процессов, которая поддерживает состояние.
-      </p>
+      </motion.p>
 
-      <div class="flex flex-wrap gap-3">
-        <NuxtLink to="/directions" class="button button-primary">
+      <!-- Actions -->
+      <motion.div
+        class="flex flex-wrap gap-3"
+        :variants="fadeUp"
+      >
+        <NuxtLink
+          to="/directions"
+          class="button button-primary"
+        >
           Направления работы
 
-          <Icon name="tabler:arrow-right" class="size-5" />
+          <Icon
+            name="tabler:arrow-right"
+            class="size-5"
+          />
         </NuxtLink>
 
-        <NuxtLink to="/contacts" class="button button-outline">
+        <NuxtLink
+          to="/contacts"
+          class="button button-outline"
+        >
           Связаться с центром
         </NuxtLink>
-      </div>
+      </motion.div>
 
       <!-- Trust -->
-      <div
-        class="flex flex-wrap items-center gap-x-4 text-sm text-text-muted/65"
+      <motion.div
+        class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text-muted/65"
+        :variants="stagger(0.07)"
       >
-        <span class="flex items-center gap-2">
-          <Icon name="tabler:award" class="size-4 text-primary" />
+        <motion.span
+          class="flex items-center gap-2"
+          :variants="fadeUp"
+        >
+          <Icon
+            name="tabler:award"
+            class="size-4 text-primary"
+          />
+
           20 лет практики
-        </span>
+        </motion.span>
 
-        <span class="flex items-center gap-2">
-          <Icon name="tabler:users-group" class="size-4 text-primary" />
+        <motion.span
+          class="flex items-center gap-2"
+          :variants="fadeUp"
+        >
+          <Icon
+            name="tabler:users-group"
+            class="size-4 text-primary"
+          />
+
           Командный подход
-        </span>
+        </motion.span>
 
-        <span class="flex items-center gap-2">
-          <Icon name="tabler:lock" class="size-4 text-primary" />
+        <motion.span
+          class="flex items-center gap-2"
+          :variants="fadeUp"
+        >
+          <Icon
+            name="tabler:lock"
+            class="size-4 text-primary"
+          />
+
           Конфиденциально
-        </span>
-      </div>
-    </div>
+        </motion.span>
+      </motion.div>
+    </motion.div>
 
-    <!-- Right -->
-    <div
+    <!-- =====================================
+         RIGHT
+    ====================================== -->
+    <motion.div
       class="relative grid overflow-hidden rounded-3xl border border-blue-300/25 bg-slate-900/40 shadow-(--glow-m)"
+      :variants="imageVariants"
+      initial="hidden"
+      animate="visible"
     >
-      <img
+      <!-- Image -->
+      <motion.img
         src="/img/about.jpg"
         alt="Команда центра TANAIS"
         class="col-[1/2] row-[1/2] size-full object-cover object-center"
+        :initial="{
+          scale: 1.04,
+        }"
+        :animate="{
+          scale: 1,
+        }"
+        :transition="{
+          duration: 1.2,
+          delay: 0.2,
+          ease: motionEase.smooth,
+        }"
       />
 
+      <!-- Gradient -->
       <div
-        class="col-[1/2] row-[1/2] bg-linear-to-t from-bg-dark/95 via-bg-dark/20 via-45% to-transparent"
+        class="col-[1/2] z-11 row-[1/2] bg-linear-to-t from-bg-dark/95 via-bg-dark/20 via-45% to-transparent"
       />
 
-      <div class="col-[1/2] row-[1/2] self-end p-8 md:p-10">
-        <div
-          class="mb-3 h-px w-10 bg-linear-to-r from-primary to-transparent"
+      <!-- Content -->
+      <motion.div
+        class="col-[1/2] z-12 row-[1/2] self-end p-8 md:p-10"
+        :variants="imageContentVariants"
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div
+          class="mb-3 h-px w-10 origin-left bg-linear-to-r from-primary to-transparent"
+          :variants="lineVariants"
+          initial="hidden"
+          animate="visible"
         />
 
         <div
@@ -83,7 +229,7 @@ import Eyebrow from "../shared/eyebrow.vue";
         <p class="mt-2 text-sm text-text-muted/70">
           Специалисты, объединённые одним подходом
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   </section>
 </template>

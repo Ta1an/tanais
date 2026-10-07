@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { motion } from "motion-v";
+import { fadeUp, stagger } from "#imports";
 import Eyebrow from "../shared/eyebrow.vue";
 
 const check = [
@@ -6,6 +8,83 @@ const check = [
   "Индивидуальный подход",
   "Опытные специалисты",
 ];
+
+const imageVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.96,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+
+    transition: {
+      duration: motionDuration.slow,
+      delay: 0.25,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+// Подпись над фотографией
+const photoLabelVariants = {
+  hidden: {
+    opacity: 0,
+    x: -12,
+  },
+
+  visible: {
+    opacity: 1,
+    x: 0,
+
+    transition: {
+      duration: motionDuration.normal,
+      delay: 0.55,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+// Floating card
+const floatingCardVariants = {
+  hidden: {
+    opacity: 0,
+    x: -18,
+    y: 10,
+  },
+
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+
+    transition: {
+      duration: motionDuration.normal,
+      delay: 0.7,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+// Декоративная подпись
+const signatureVariants = {
+  hidden: {
+    opacity: 0,
+    y: 8,
+  },
+
+  visible: {
+    opacity: 1,
+    y: 0,
+
+    transition: {
+      duration: motionDuration.normal,
+      delay: 0.85,
+      ease: motionEase.smooth,
+    },
+  },
+};
 </script>
 
 <template>
@@ -13,32 +92,38 @@ const check = [
     class="relative grid lg:grid-cols-2 min-h-svh items-center section top-section"
   >
     <!-- Left -->
-    <div class="flex flex-col gap-8">
-      <Eyebrow text="центр психоогической помощи" />
+    <motion.div
+      class="flex flex-col gap-8"
+      :variants="stagger(0.1, 0.1)"
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div :variants="fadeUp">
+        <Eyebrow text="центр психологической помощи" />
+      </motion.div>
 
       <div class="flex flex-col gap-4">
-        <h1>
+        <motion.h1 :variants="fadeUp">
           Понять себя.
-          <span class="gradient-text block"> Изменить жизнь. </span>
-        </h1>
 
-        <p class="max-w-200">
+          <span class="gradient-text block"> Изменить жизнь. </span>
+        </motion.h1>
+
+        <motion.p :variants="fadeUp" class="max-w-200">
           Помогаем разобраться в причинах состояния, увидеть механизм проблемы и
           выстроить персональный путь изменений.
-        </p>
+        </motion.p>
       </div>
 
-      <!-- Actions -->
-      <div class="flex gap-4 flex-wrap">
+      <motion.div :variants="fadeUp" class="flex flex-wrap gap-4">
         <NuxtLink to="/contacts" class="button button-primary">
           Записаться на консультацию
         </NuxtLink>
 
         <a href="#process" class="button button-outline"> Как мы работаем </a>
-      </div>
+      </motion.div>
 
-      <!-- Trust points -->
-      <div class="flex gap-4 flex-wrap">
+      <motion.div :variants="fadeUp" class="flex flex-wrap gap-4">
         <span
           v-for="item in check"
           :key="item"
@@ -49,49 +134,85 @@ const check = [
           >
             <Icon name="tabler:check" />
           </div>
+
           {{ item }}
         </span>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
 
     <!-- Right -->
     <div class="relative hidden items-center justify-center lg:flex">
       <!-- Ambient glow -->
-      <div class="inset-[15%] glow-blue" />
+      <motion.div
+        class="glow-blue inset-[15%]"
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        :transition="{
+          duration: motionDuration.slow,
+          delay: 0.2,
+          ease: motionEase.smooth,
+        }"
+      />
 
       <!-- Orbital circles -->
-      <div
-        v-for="size in [75, 90, 105]"
+      <motion.div
+        v-for="(size, index) in [75, 90, 105]"
         :key="size"
-        class="bg-ring left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 aspect-square"
-        :style="{ width: `${size}% ` }"
+        class="bg-ring left-1/2 top-1/2 aspect-square"
+        :style="{
+          width: `${size}%`,
+          translateX: '-50%',
+          translateY: '-50%',
+        }"
+        :initial="{
+          opacity: 0,
+          scale: 0.92,
+        }"
+        :animate="{
+          opacity: 1,
+          scale: 1,
+        }"
+        :transition="{
+          duration: motionDuration.slow,
+          delay: 0.2 + index * 0.08,
+          ease: motionEase.smooth,
+        }"
       />
 
       <!-- Photo label -->
-      <div
+      <motion.div
         class="absolute left-0 -top-7 z-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-[3px]"
+        :variants="photoLabelVariants"
+        initial="hidden"
+        animate="visible"
       >
         <span
           class="size-1.75 rounded-full bg-[#00c8e9] shadow-[0_0_12px_#00c8e9]"
         />
 
         Команда TANAIS
-      </div>
+      </motion.div>
 
       <!-- Main photo -->
-      <div
+      <motion.div
         class="relative z-2 w-[92%] overflow-hidden rounded-3xl border border-border/20 shadow-(--glow-m)"
+        :variants="imageVariants"
+        initial="hidden"
+        animate="visible"
       >
         <img
           src="/img/about.jpg"
           alt="Команда психологического центра TANAIS"
           class="block h-auto w-full object-cover"
         />
-      </div>
+      </motion.div>
 
       <!-- Floating info card -->
-      <div
-        class="absolute bottom-[10%] left-[-5%] z-10 flex items-center gap-3 card p-4 bg-bg/80 backdrop-blur-xl shadow-(--glow-m)"
+      <motion.div
+        class="absolute bottom-[10%] left-[-5%] z-10 flex items-center gap-3 card bg-bg/80 p-4 backdrop-blur-xl shadow-(--glow-m)"
+        :variants="floatingCardVariants"
+        initial="hidden"
+        animate="visible"
       >
         <div class="icon size-10">
           <Icon name="tabler:heart-handshake" />
@@ -104,19 +225,30 @@ const check = [
             Внимание к каждому человеку
           </span>
         </div>
-      </div>
+      </motion.div>
 
-      <span
+      <motion.span
         class="absolute -bottom-10 right-0 -rotate-6 text-2xl font-light italic text-indigo-300/45"
-        >К себе. К жизни</span
+        :variants="signatureVariants"
+        initial="hidden"
+        animate="visible"
       >
+        К себе. К жизни
+      </motion.span>
     </div>
 
     <!-- Bottom detail -->
-    <div
+    <motion.div
       class="col-span-2 self-center justify-self-center pt-5 text-xs uppercase tracking-[0.4em] text-white/25"
+      :initial="{ opacity: 0 }"
+      :animate="{ opacity: 1 }"
+      :transition="{
+        duration: motionDuration.normal,
+        delay: 0.9,
+        ease: motionEase.smooth,
+      }"
     >
       Гармония · развитие · реальные изменения
-    </div>
+    </motion.div>
   </section>
 </template>

@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import Eyebrow from "~/components/shared/eyebrow.vue";
-import { motion, AnimatePresence } from "motion-v";
+import { AnimatePresence, motion } from "motion-v";
+
+import {
+  fadeLeft,
+  fadeScale,
+  fadeUp,
+  motionDuration,
+  motionEase,
+  motionViewport,
+  stagger,
+} from "~/utils/motion";
 
 useSeoMeta({
   title: "Материалы — TANAIS",
@@ -136,6 +146,24 @@ const typeIcons: Record<MaterialType, string> = {
   article: "tabler:file-text",
   guide: "tabler:route",
 };
+
+const sideLineVariants = {
+  hidden: {
+    opacity: 0,
+    scaleY: 0,
+  },
+
+  visible: {
+    opacity: 1,
+    scaleY: 1,
+
+    transition: {
+      duration: motionDuration.slow,
+      delay: 0.2,
+      ease: motionEase.smooth,
+    },
+  },
+};
 </script>
 
 <template>
@@ -146,50 +174,84 @@ const typeIcons: Record<MaterialType, string> = {
     class="section top-section grid grid-cols-1 items-center lg:grid-cols-2"
   >
     <!-- Left -->
-    <div class="flex flex-col gap-8">
-      <Eyebrow text="Материалы" />
+    <motion.div
+      class="flex flex-col gap-8"
+      :variants="stagger(0.1, 0.1)"
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div :variants="fadeUp">
+        <Eyebrow text="Материалы" />
+      </motion.div>
 
-      <h1>
+      <motion.h1 :variants="fadeUp">
         Понять происходящее
-        <span class="gradient-text block"> немного глубже. </span>
-      </h1>
 
-      <p class="max-w-3xl">
+        <span class="gradient-text block"> немного глубже. </span>
+      </motion.h1>
+
+      <motion.p class="max-w-3xl" :variants="fadeUp">
         Тесты для самооценки, видео, статьи и практические материалы о зависимом
         поведении, тревоге, отношениях и работе с семьёй.
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
 
     <!-- Right -->
-    <div class="hidden justify-end lg:flex">
-      <div class="max-w-md border-l border-primary/20 pl-8">
-        <Icon name="tabler:books" class="mb-5 size-9 text-primary" />
+    <motion.div
+      class="hidden justify-end lg:flex"
+      :variants="fadeLeft"
+      initial="hidden"
+      animate="visible"
+    >
+      <div class="relative max-w-md pl-8">
+        <motion.div
+          class="absolute bottom-0 left-0 top-0 w-px origin-top bg-linear-to-b from-primary/40 to-transparent"
+          :variants="sideLineVariants"
+        />
 
-        <p class="text-sm text-text-muted/65">
-          Материалы помогают лучше ориентироваться в теме, но не заменяют
-          индивидуальную оценку состояния и работу со специалистом.
-        </p>
+        <motion.div :variants="stagger(0.1, 0.25)">
+          <motion.div :variants="fadeUp">
+            <Icon name="tabler:books" class="mb-5 size-9 text-primary" />
+          </motion.div>
+
+          <motion.p class="text-sm text-text-muted/65" :variants="fadeUp">
+            Материалы помогают лучше ориентироваться в теме, но не заменяют
+            индивидуальную оценку состояния и работу со специалистом.
+          </motion.p>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   </section>
 
   <!-- =========================================
          MATERIALS
     ========================================== -->
   <section class="section flex flex-col gap-10">
-    <div
+    <motion.div
       class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      :variants="stagger(0.1)"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.medium"
     >
-      <Eyebrow text="Библиотека материалов" />
+      <motion.div :variants="fadeUp">
+        <Eyebrow text="Библиотека материалов" />
+      </motion.div>
 
-      <span class="text-sm text-text-muted/50">
+      <motion.span class="text-sm text-text-muted/50" :variants="fadeUp">
         {{ filteredMaterials.length }}
         {{ filteredMaterials.length === 1 ? "материал" : "материалов" }}
-      </span>
-    </div>
+      </motion.span>
+    </motion.div>
 
-    <div class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
-      <button
+    <motion.div
+      class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5"
+      :variants="stagger(0.06, 0.05)"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.default"
+    >
+      <motion.button
         v-for="filter in filters"
         :key="filter.value"
         type="button"
@@ -199,6 +261,7 @@ const typeIcons: Record<MaterialType, string> = {
             ? 'border-primary/40 bg-primary/10 text-primary shadow-(--glow-s)'
             : 'border-border/15 bg-bg/60 text-text-muted hover:border-primary/25 hover:bg-bg'
         "
+        :variants="fadeScale"
         @click="activeFilter = filter.value"
       >
         <Icon :name="filter.icon" class="size-6" />
@@ -206,113 +269,158 @@ const typeIcons: Record<MaterialType, string> = {
         <span class="font-medium">
           {{ filter.label }}
         </span>
-      </button>
-    </div>
-    <AnimatePresence mode="wait" :initial="false">
-      <motion.div
-        :key="activeFilter"
-        class="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
-        :initial="{ opacity: 0, y: 12 }"
-        :animate="{ opacity: 1, y: 0 }"
-        :exit="{ opacity: 0, y: -12 }"
-        :transition="{
-          duration: 0.25,
-          ease: 'easeInOut',
-        }"
-      >
-        <NuxtLink
-          v-for="material in filteredMaterials"
-          :to="material.to"
-          class="group card card-hover grid h-full grid-rows-[auto_auto_1fr_auto_auto]"
+      </motion.button>
+    </motion.div>
+
+    <motion.div
+      :variants="fadeUp"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.early"
+    >
+      <AnimatePresence mode="wait" :initial="false">
+        <motion.div
+          :key="activeFilter"
+          class="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+          :initial="{
+            opacity: 0,
+            y: 10,
+          }"
+          :animate="{
+            opacity: 1,
+            y: 0,
+          }"
+          :exit="{
+            opacity: 0,
+            y: -10,
+          }"
+          :transition="{
+            duration: 0.25,
+            ease: 'easeInOut',
+          }"
         >
-          <!-- Header -->
-          <div class="flex items-start justify-between gap-5">
-            <div
-              class="icon size-16 transition-colors duration-300 group-hover:text-violet-400"
-            >
-              <Icon :name="material.icon" class="size-8" />
-            </div>
-
-            <div
-              class="flex items-center gap-2 rounded-full border border-border/10 bg-white/3 px-3 py-1.5 text-xs text-text-muted/60"
-            >
-              <Icon :name="typeIcons[material.type]" class="size-4" />
-
-              {{ typeLabels[material.type] }}
-            </div>
-          </div>
-
-          <!-- Category -->
-          <div
-            class="mt-8 text-xs font-medium uppercase tracking-[0.2em] text-primary/70"
+          <NuxtLink
+            v-for="material in filteredMaterials"
+            :key="material.to"
+            :to="material.to"
+            class="group card card-hover grid h-full grid-rows-[auto_auto_1fr_auto_auto]"
           >
-            {{ material.category }}
-          </div>
+            <!-- Header -->
+            <div class="flex items-start justify-between gap-5">
+              <div
+                class="icon size-16 transition-colors duration-300 group-hover:text-violet-400"
+              >
+                <Icon :name="material.icon" class="size-8" />
+              </div>
 
-          <!-- Content -->
-          <h4 class="mt-3">
-            {{ material.title }}
-          </h4>
+              <div
+                class="flex items-center gap-2 rounded-full border border-border/10 bg-white/3 px-3 py-1.5 text-xs text-text-muted/60"
+              >
+                <Icon :name="typeIcons[material.type]" class="size-4" />
 
-          <p class="mt-4 text-sm text-text-muted/70">
-            {{ material.description }}
-          </p>
+                {{ typeLabels[material.type] }}
+              </div>
+            </div>
 
-          <!-- Footer -->
-          <div class="flex items-end justify-between gap-5 pt-8">
-            <span class="text-xs text-text-muted/45">
-              {{ material.meta }}
-            </span>
-
+            <!-- Category -->
             <div
-              class="flex items-center gap-2 text-sm font-medium text-primary"
+              class="mt-8 text-xs font-medium uppercase tracking-[0.2em] text-primary/70"
             >
-              <span>
-                {{
-                  material.type === "test"
-                    ? "Пройти"
-                    : material.type === "video"
-                      ? "Смотреть"
-                      : material.type === "guide"
-                        ? "Открыть"
-                        : "Читать"
-                }}
+              {{ material.category }}
+            </div>
+
+            <!-- Content -->
+            <h4 class="mt-3">
+              {{ material.title }}
+            </h4>
+
+            <p class="mt-4 text-sm text-text-muted/70">
+              {{ material.description }}
+            </p>
+
+            <!-- Footer -->
+            <div class="flex items-end justify-between gap-5 pt-8">
+              <span class="text-xs text-text-muted/45">
+                {{ material.meta }}
               </span>
 
-              <Icon
-                name="tabler:arrow-right"
-                class="size-5 transition-transform duration-300 group-hover:translate-x-1.5"
-              />
+              <div
+                class="flex items-center gap-2 text-sm font-medium text-primary"
+              >
+                <span>
+                  {{
+                    material.type === "test"
+                      ? "Пройти"
+                      : material.type === "video"
+                        ? "Смотреть"
+                        : material.type === "guide"
+                          ? "Открыть"
+                          : "Читать"
+                  }}
+                </span>
+
+                <Icon
+                  name="tabler:arrow-right"
+                  class="size-5 transition-transform duration-300 group-hover:translate-x-1.5"
+                />
+              </div>
             </div>
-          </div>
-        </NuxtLink>
+          </NuxtLink>
+        </motion.div>
+      </AnimatePresence>
+    </motion.div>
+
+    <!-- Empty -->
+    <AnimatePresence>
+      <motion.div
+        v-if="!filteredMaterials.length"
+        class="card p-12 text-center"
+        :initial="{
+          opacity: 0,
+          scale: 0.98,
+        }"
+        :animate="{
+          opacity: 1,
+          scale: 1,
+        }"
+        :exit="{
+          opacity: 0,
+          scale: 0.98,
+        }"
+        :transition="{
+          duration: 0.25,
+        }"
+      >
+        <Icon
+          name="tabler:folder-open"
+          class="mx-auto size-10 text-primary/50"
+        />
+
+        <p class="mt-4">В этой категории материалы скоро появятся.</p>
       </motion.div>
     </AnimatePresence>
 
-    <!-- Empty -->
-    <div v-if="!filteredMaterials.length" class="card p-12 text-center">
-      <Icon name="tabler:folder-open" class="mx-auto size-10 text-primary/50" />
-
-      <p class="mt-4">В этой категории материалы скоро появятся.</p>
-    </div>
-
-    <div
-      class="flex flex-col gap-6 rounded-3xl border card md:flex-row md:items-center"
+    <motion.div
+      class="card flex flex-col gap-6 rounded-3xl border md:flex-row md:items-center"
+      :variants="fadeScale"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.late"
     >
-      <div class="icon size-14 shrink-0">
+      <motion.div class="icon size-14 shrink-0" :variants="fadeScale">
         <Icon name="tabler:info-circle" class="size-7" />
-      </div>
+      </motion.div>
 
-      <div>
-        <h3>О тестах на сайте</h3>
+      <motion.div :variants="stagger(0.08, 0.05)">
+        <motion.h3 :variants="fadeUp"> О тестах на сайте </motion.h3>
 
-        <p class="text-sm text-text-muted/65">
+        <motion.p class="text-sm text-text-muted/65" :variants="fadeUp">
           Онлайн-тесты предназначены для самооценки и ориентирования в ситуации.
           Их результаты сами по себе не являются медицинским или психиатрическим
           диагнозом и не заменяют очную профессиональную оценку.
-        </p>
-      </div>
-    </div>
+        </motion.p>
+      </motion.div>
+    </motion.div>
   </section>
 
   <!-- =========================================
@@ -332,23 +440,3 @@ const typeIcons: Record<MaterialType, string> = {
     }"
   />
 </template>
-
-<style scoped>
-.material-move,
-.materials-enter-active,
-.materials-leave-active {
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
-}
-
-.materials-enter-from,
-.materials-leave-to {
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.materials-leave-active {
-  position: absolute;
-}
-</style>

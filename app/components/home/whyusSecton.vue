@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import { motion } from "motion-v";
 import Eyebrow from "../shared/eyebrow.vue";
+
+import {
+  fadeScale,
+  fadeUp,
+  motionViewport,
+  stagger,
+} from "~/utils/motion";
 
 const features = [
   {
@@ -27,40 +35,60 @@ const features = [
 
 <template>
   <section id="about" class="section flex flex-col gap-10">
-    <!-- Header -->
-    <div class="grid lg:grid-cols-[1fr_0.5fr] lg:items-center gap-8">
-      <Eyebrow text="почему Tanais" class="lg:col-span-2" />
+    <motion.div
+      class="grid gap-8 lg:grid-cols-[1fr_0.5fr] lg:items-center"
+      :variants="stagger(0.1)"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.medium"
+    >
+      <motion.div
+        class="lg:col-span-2"
+        :variants="fadeUp"
+      >
+        <Eyebrow text="почему Tanais" />
+      </motion.div>
 
-      <h2>
+      <motion.h2 :variants="fadeUp">
         Не один метод.
-        <span class="gradient-text block"> Система восстановления. </span>
-      </h2>
 
-      <p class="max-w-xl">
+        <span class="gradient-text block">
+          Система восстановления.
+        </span>
+      </motion.h2>
+
+      <motion.p
+        class="max-w-xl"
+        :variants="fadeUp"
+      >
         Мы не подбираем человека под готовую программу. Сначала определяем
         структуру проблемы, а затем выстраиваем работу вокруг неё.
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
 
-    <!-- Features -->
-    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      <article
+    <motion.div
+      class="grid gap-4 md:grid-cols-2 xl:grid-cols-4"
+      :variants="stagger(0.09, 0.05)"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.default"
+    >
+      <motion.article
         v-for="feature in features"
         :key="feature.title"
         class="card flex flex-col gap-2"
+        :variants="fadeScale"
       >
         <div class="icon">
           <Icon :name="feature.icon" class="size-7" />
         </div>
 
-        <h4>
-          {{ feature.title }}
-        </h4>
+        <h4>{{ feature.title }}</h4>
 
         <p class="text-sm">
           {{ feature.text }}
         </p>
-      </article>
-    </div>
+      </motion.article>
+    </motion.div>
   </section>
 </template>

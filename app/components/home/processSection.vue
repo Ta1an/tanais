@@ -1,7 +1,28 @@
 <script setup lang="ts">
+import { motion, useScroll, useSpring } from "motion-v";
 import Eyebrow from "../shared/eyebrow.vue";
 
+import {
+  fadeUp,
+  fadeScale,
+  motionViewport,
+  stagger,
+} from "~/utils/motion";
+
 const NuxtLinkComponent = resolveComponent("NuxtLink");
+
+const processRef = ref<HTMLElement | null>(null);
+
+const { scrollYProgress } = useScroll({
+  target: processRef,
+  offset: ["start 75%", "end 45%"],
+});
+
+const progress = useSpring(scrollYProgress, {
+  stiffness: 120,
+  damping: 30,
+  mass: 0.3,
+});
 
 const steps = [
   {
@@ -44,66 +65,148 @@ function getStepProps(step: (typeof steps)[number]) {
 </script>
 
 <template>
-  <section id="process" class="section flex flex-col gap-10">
+  <section
+    id="process"
+    ref="processRef"
+    class="section flex flex-col gap-10"
+  >
     <!-- Header -->
-    <div class="grid lg:grid-cols-[1fr_0.5fr] gap-8">
-      <Eyebrow text="как проходит работа" class="lg:col-span-2" />
+    <motion.div
+      class="grid gap-8 lg:grid-cols-[1fr_0.5fr]"
+      :variants="stagger(0.1)"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.medium"
+    >
+      <motion.div
+        class="lg:col-span-2"
+        :variants="fadeUp"
+      >
+        <Eyebrow text="как проходит работа" />
+      </motion.div>
 
-      <h2>
+      <motion.h2 :variants="fadeUp">
         Сначала понять.<br />
-        <span class="gradient-text"> Потом менять. </span>
-      </h2>
 
-      <p class="max-w-xl lg:justify-self-end">
+        <span class="gradient-text">
+          Потом менять.
+        </span>
+      </motion.h2>
+
+      <motion.p
+        class="max-w-xl lg:justify-self-end"
+        :variants="fadeUp"
+      >
         Работа начинается не с выбора техники. Сначала необходимо понять
         структуру ситуации, определить поддерживающие механизмы и только затем
         формировать маршрут изменений.
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
 
-    <!-- Steps -->
-    <div class="relative grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <component
-        v-for="step in steps"
-        :key="step.number"
-        :is="getStepComponent(step)"
-        v-bind="getStepProps(step)"
-        class="group grid grid-rows-subgrid row-span-5 relative card"
-        :class="
-          step.accent
-            ? 'border-primary/35 bg-blue-950/45 shadow-(--glow-s) card-hover cursor-pointer'
-            : 'shadow-s'
-        "
-      >
-        <span
-          class="text-5xl font-light tracking-[-0.06em] absolute right-7 top-7"
-          :class="step.accent ? 'text-primary/30' : 'text-blue-400/20'"
-        >
-          {{ step.number }}
-        </span>
+    <div class="relative">
+      <!-- Progress rail -->
+      <div class="relative mb-5 hidden lg:block">
+        <div
+          class="absolute left-[12.5%] right-[12.5%] top-1/2 h-px bg-border/20"
+        />
 
-        <div class="icon">
-          <!-- icon -->
-          <Icon :name="step.icon" class="size-8" />
+        <motion.div
+          class="absolute left-[12.5%] right-[12.5%] top-1/2 h-px origin-left bg-linear-to-r from-primary/60 via-blue-400/60 to-violet-400/60 shadow-[0_0_8px_rgb(59_130_246/0.18)]"
+          :style="{
+            scaleX: progress,
+          }"
+        />
+
+        <div class="relative grid grid-cols-4">
+          <div
+            v-for="step in steps"
+            :key="`point-${step.number}`"
+            class="relative flex justify-center"
+          >
+            <div
+              class="flex size-3 items-center justify-center rounded-full border border-primary/30 bg-bg"
+            />
+
+            <span
+              class="text-primary absolute bottom-3 text-2xl font-light tracking-widest"
+            >
+              {{ step.number }}
+            </span>
+          </div>
         </div>
+      </div>
 
-        <h4>
-          {{ step.title }}
-        </h4>
-
-        <p class="text-sm">
-          {{ step.text }}
-        </p>
-
-        <span
-          v-if="step.accent"
-          class="inline-flex items-center gap-2 text-sm font-medium text-primary"
+      <!-- Cards -->
+      <motion.div
+        class="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+        :variants="stagger(0.12, 0.1)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.early"
+      >
+        <motion.div
+          v-for="step in steps"
+          :key="step.number"
+          class="relative row-span-5 grid grid-rows-subgrid"
+          :variants="fadeScale"
         >
-          О диагностике
+          <component
+            :is="getStepComponent(step)"
+            v-bind="getStepProps(step)"
+            class="group relative grid h-full grid-rows-subgrid row-span-5 card"
+            :class="
+              step.accent
+                ? 'border-primary/35 bg-blue-950/45 shadow-(--glow-s) card-hover cursor-pointer'
+                : 'shadow-s'
+            "
+          >
+            <motion.div
+              v-if="step.accent"
+              class="pointer-events-none absolute inset-0 rounded-[inherit] border border-primary/15"
+              :animate="{
+                opacity: [0.2, 0.55, 0.2],
+              }"
+              :transition="{
+                duration: 4,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }"
+            />
 
-          <Icon name="tabler:arrow-right" class="size-4" />
-        </span>
-      </component>
+            <span
+              class="md:hidden inline absolute right-7 top-7 text-5xl font-light tracking-[-0.06em]"
+              :class="
+                step.accent
+                  ? 'text-primary/30'
+                  : 'text-blue-400/20'
+              "
+            >
+              {{ step.number }}
+            </span>
+
+            <div class="icon">
+              <Icon :name="step.icon" class="size-8" />
+            </div>
+
+            <h4>{{ step.title }}</h4>
+
+            <p class="text-sm">
+              {{ step.text }}
+            </p>
+
+            <span
+              v-if="step.accent"
+              class="inline-flex items-center gap-2 text-sm font-medium text-primary"
+            >
+              О диагностике
+              <Icon name="tabler:arrow-right" class="size-4" />
+            </span>
+          </component>
+        </motion.div>
+      </motion.div>
     </div>
   </section>
 </template>
+
+
+

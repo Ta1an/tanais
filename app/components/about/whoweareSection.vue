@@ -1,42 +1,68 @@
 <script setup lang="ts">
+import { motion } from "motion-v";
+
 import Eyebrow from "../shared/eyebrow.vue";
+
+import {
+  fadeLeft,
+  fadeRight,
+  fadeUp,
+  motionViewport,
+  stagger,
+} from "~/utils/motion";
 </script>
 
 <template>
-  <section
-    class="section grid lg:grid-cols-[0.5fr_1fr_0.5fr] gap-8"
+  <motion.section
+    class="section grid gap-8 lg:grid-cols-[0.5fr_1fr_0.5fr]"
+    :variants="stagger(0.1)"
+    initial="hidden"
+    while-in-view="visible"
+    :in-view-options="motionViewport.medium"
   >
-    <Eyebrow text="Кто мы" class="lg:col-span-3" />
+    <!-- Eyebrow -->
+    <motion.div class="lg:col-span-3" :variants="fadeUp">
+      <Eyebrow text="Кто мы" />
+    </motion.div>
 
-    <h2>
+    <!-- Heading -->
+    <motion.h2 :variants="fadeRight">
       Не место,
-      <span class="gradient-text block"> где дают готовые ответы. </span>
-    </h2>
 
-    <div class="flex flex-col gap-4">
-      <p>
+      <span class="gradient-text block"> где дают готовые ответы. </span>
+    </motion.h2>
+
+    <!-- Text -->
+    <motion.div class="flex flex-col gap-4" :variants="stagger(0.08)">
+      <motion.p :variants="fadeUp">
         TANAIS — центр психологической помощи, в котором работа строится вокруг
         понимания конкретного человека, его состояния, жизненной ситуации и
         устойчивых механизмов поведения.
-      </p>
+      </motion.p>
 
-      <p>
+      <motion.p :variants="fadeUp">
         Мы не рассматриваем зависимость, тревогу или семейный кризис как
         отдельный симптом, существующий сам по себе. Для нас важно увидеть, как
         между собой связаны эмоциональные реакции, нервная система, мышление,
         поведение, отношения и среда.
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
 
-    <div class="card border-primary/15 bg-primary/10">
+    <!-- Accent -->
+    <motion.div
+      class="card border-primary/15 bg-primary/10"
+      :variants="fadeLeft"
+    >
       <p>
         Наша задача — не объяснить человеку, каким он должен стать, а помочь
         увидеть,
+
         <span class="text-primary">
           что именно удерживает его в прежнем сценарии
         </span>
+
         и где находятся реальные точки изменения.
       </p>
-    </div>
-  </section>
+    </motion.div>
+  </motion.section>
 </template>

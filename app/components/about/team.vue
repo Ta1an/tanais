@@ -1,5 +1,16 @@
 <script setup lang="ts">
+import { motion } from "motion-v";
+
 import Eyebrow from "../shared/eyebrow.vue";
+
+import {
+  fadeScale,
+  fadeUp,
+  motionDuration,
+  motionEase,
+  motionViewport,
+  stagger,
+} from "~/utils/motion";
 
 const specialists = [
   {
@@ -26,38 +37,108 @@ const specialists = [
     to: "/about#team",
   },
 ];
+
+const imageVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 1.05,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+
+    transition: {
+      duration: motionDuration.slow,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+const contentVariants = {
+  hidden: {
+    opacity: 0,
+    y: 12,
+  },
+
+  visible: {
+    opacity: 1,
+    y: 0,
+
+    transition: {
+      duration: motionDuration.normal,
+      delay: 0.12,
+      ease: motionEase.smooth,
+    },
+  },
+};
 </script>
 
 <template>
-  <section id="team" class="section flex flex-col gap-10">
-    <div class="grid lg:grid-cols-[1fr_0.5fr] lg:items-end">
-      <div class="flex flex-col gap-8">
-        <Eyebrow text="команда" />
+  <section
+    id="team"
+    class="section flex flex-col gap-10"
+  >
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+    <motion.div
+      class="grid gap-8 lg:grid-cols-[1fr_0.5fr] lg:items-end"
+      :variants="stagger(0.1)"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.medium"
+    >
+      <motion.div
+        class="flex flex-col gap-8"
+        :variants="stagger(0.1)"
+      >
+        <motion.div :variants="fadeUp">
+          <Eyebrow text="команда" />
+        </motion.div>
 
-        <h2>
+        <motion.h2 :variants="fadeUp">
           Система важна.
-          <span class="gradient-text block"> Но работают люди. </span>
-        </h2>
-      </div>
 
-      <p class="max-w-xl leading-relaxed lg:justify-self-end">
+          <span class="gradient-text block">
+            Но работают люди.
+          </span>
+        </motion.h2>
+      </motion.div>
+
+      <motion.p
+        class="max-w-xl leading-relaxed lg:justify-self-end"
+        :variants="fadeUp"
+      >
         В зависимости от ситуации в работу могут подключаться специалисты разных
         направлений.
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
 
-    <div class="grid gap-4 md:grid-cols-3">
-      <article
+    <!-- =========================================
+         TEAM
+    ========================================== -->
+    <motion.div
+      class="grid gap-4 md:grid-cols-3"
+      :variants="stagger(0.12, 0.05)"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.default"
+    >
+      <motion.article
         v-for="specialist in specialists"
         :key="specialist.name"
-        class="group overflow-hidden card card-hover p-0 rounded-3xl"
+        class="group card card-hover overflow-hidden rounded-3xl p-0"
+        :variants="fadeScale"
       >
+        <!-- Photo -->
         <div class="relative aspect-4/3 overflow-hidden bg-slate-800">
-          <img
+          <motion.img
             :src="specialist.image"
             :alt="specialist.name"
             class="size-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
+            :variants="imageVariants"
           />
 
           <div
@@ -65,7 +146,11 @@ const specialists = [
           />
         </div>
 
-        <div class="p-6 border-t border-t-border/20">
+        <!-- Content -->
+        <motion.div
+          class="border-t border-t-border/20 p-6"
+          :variants="contentVariants"
+        >
           <h3>
             {{ specialist.name }}
           </h3>
@@ -77,8 +162,8 @@ const specialists = [
           <p class="mt-4 text-sm">
             {{ specialist.description }}
           </p>
-        </div>
-      </article>
-    </div>
+        </motion.div>
+      </motion.article>
+    </motion.div>
   </section>
 </template>

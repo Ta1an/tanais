@@ -1,6 +1,90 @@
 <script setup lang="ts">
 import Eyebrow from "~/components/shared/eyebrow.vue";
 
+import { motion } from "motion-v";
+
+import {
+  fade,
+  fadeLeft,
+  fadeScale,
+  fadeUp,
+  motionDuration,
+  motionEase,
+  motionViewport,
+  stagger,
+} from "~/utils/motion";
+
+const heroVisualVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.96,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+
+    transition: {
+      duration: motionDuration.slow,
+      delay: 0.2,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+const heroRingVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.82,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+
+    transition: {
+      duration: motionDuration.slow,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+const heroIconVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+  },
+
+  visible: {
+    opacity: 1,
+    scale: 1,
+
+    transition: {
+      duration: motionDuration.slow,
+      delay: 0.2,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
+const arrowVariants = {
+  hidden: {
+    opacity: 0,
+    x: -6,
+  },
+
+  visible: {
+    opacity: 1,
+    x: 0,
+
+    transition: {
+      duration: motionDuration.fast,
+      delay: 0.12,
+      ease: motionEase.smooth,
+    },
+  },
+};
+
 type Button = {
   text: string;
   to?: string;
@@ -121,22 +205,29 @@ const cycleGridClass = computed(() => {
       class="section top-section grid grid-cols-1 items-center lg:grid-cols-[1fr_0.75fr]"
     >
       <!-- Left -->
-      <div class="flex flex-col gap-8">
-        <Eyebrow :text="hero.eyebrow" />
+      <motion.div
+        class="flex flex-col gap-8"
+        :variants="stagger(0.1, 0.1)"
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div :variants="fadeUp">
+          <Eyebrow :text="hero.eyebrow" />
+        </motion.div>
 
-        <h1>
+        <motion.h1 :variants="fadeUp">
           {{ hero.title }}
 
           <span class="gradient-text block">
             {{ hero.accent }}
           </span>
-        </h1>
+        </motion.h1>
 
-        <p class="max-w-3xl">
+        <motion.p class="max-w-3xl" :variants="fadeUp">
           {{ hero.intro }}
-        </p>
+        </motion.p>
 
-        <div class="flex flex-wrap gap-3">
+        <motion.div class="flex flex-wrap gap-3" :variants="fadeUp">
           <NuxtLink
             :to="hero.primaryButton?.to ?? '/contacts'"
             class="button button-primary"
@@ -162,34 +253,67 @@ const cycleGridClass = computed(() => {
               class="size-5"
             />
           </NuxtLink>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <!-- Visual -->
-      <div class="relative h-full hidden items-center justify-center lg:flex">
-        <div class="glow-violet size-120" />
+      <motion.div
+        class="relative hidden h-full items-center justify-center lg:flex"
+        :variants="heroVisualVariants"
+        initial="hidden"
+        animate="visible"
+      >
+        <!-- Glow -->
+        <motion.div
+          class="glow-violet size-120"
+          :initial="{ opacity: 0 }"
+          :animate="{ opacity: 1 }"
+          :transition="{
+            duration: motionDuration.slow,
+            delay: 0.25,
+            ease: motionEase.smooth,
+          }"
+        />
 
         <!-- Rings -->
-        <div
-          v-for="size in [88, 68, 48]"
+        <motion.div
+          v-for="(size, index) in [48, 68, 88]"
           :key="size"
           class="bg-ring aspect-square"
           :style="{ width: `${size}%` }"
+          :variants="heroRingVariants"
+          :transition="{
+            delay: 0.15 + index * 0.08,
+          }"
         />
 
         <!-- Main icon -->
-        <div
+        <motion.div
           class="flex size-44 items-center justify-center rounded-full border border-primary/25 bg-bg/70 text-primary shadow-(--glow-l) backdrop-blur-xl"
+          :variants="heroIconVariants"
         >
           <Icon :name="hero.icon" class="size-20" />
-        </div>
+        </motion.div>
 
         <!-- Callouts -->
-        <div
-          v-for="callout in hero.callouts"
+        <motion.div
+          v-for="(callout, index) in hero.callouts"
           :key="`${callout.label}-${callout.text}`"
-          class="absolute card bg-bg/80 flex flex-col"
+          class="absolute card flex flex-col bg-bg/80"
           :class="calloutClasses[callout.position]"
+          :initial="{
+            opacity: 0,
+            scale: 0.92,
+          }"
+          :animate="{
+            opacity: 1,
+            scale: 1,
+          }"
+          :transition="{
+            duration: motionDuration.normal,
+            delay: 0.5 + index * 0.1,
+            ease: motionEase.smooth,
+          }"
         >
           <span class="text-xs uppercase tracking-[0.18em] text-text-muted/40">
             {{ callout.label }}
@@ -198,40 +322,58 @@ const cycleGridClass = computed(() => {
           <span class="font-medium">
             {{ callout.text }}
           </span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
 
     <!-- ========================================
          SITUATIONS
     ========================================= -->
     <section class="section flex flex-col gap-10">
-      <div class="grid gap-8 lg:grid-cols-2">
-        <div class="flex flex-col gap-8">
-          <Eyebrow :text="situations.eyebrow" />
+      <!-- Header -->
+      <motion.div
+        class="grid gap-8 lg:grid-cols-2"
+        :variants="stagger(0.1)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.medium"
+      >
+        <motion.div class="flex flex-col gap-8" :variants="stagger(0.1)">
+          <motion.div :variants="fadeUp">
+            <Eyebrow :text="situations.eyebrow" />
+          </motion.div>
 
-          <h2>
+          <motion.h2 :variants="fadeUp">
             {{ situations.title }}
 
             <span v-if="situations.accent" class="gradient-text block">
               {{ situations.accent }}
             </span>
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
-        <p
+        <motion.p
           v-if="situations.text"
           class="max-w-xl lg:justify-self-end lg:self-end"
+          :variants="fadeUp"
         >
           {{ situations.text }}
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <article
+      <!-- Cards -->
+      <motion.div
+        class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+        :variants="stagger(0.08, 0.05)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.default"
+      >
+        <motion.article
           v-for="item in situations.items"
           :key="item.title"
           class="card flex flex-col gap-3"
+          :variants="fadeScale"
         >
           <div class="icon size-14">
             <Icon :name="item.icon" class="size-7" />
@@ -244,46 +386,62 @@ const cycleGridClass = computed(() => {
           <p class="text-sm text-text-muted/65">
             {{ item.text }}
           </p>
-        </article>
-      </div>
+        </motion.article>
+      </motion.div>
     </section>
 
     <!-- ========================================
          CYCLE
     ========================================= -->
     <section v-if="cycle" id="cycle" class="section flex flex-col gap-10">
-      <div class="flex flex-col gap-8">
-        <Eyebrow :text="cycle.eyebrow" />
+      <!-- Header -->
+      <motion.div
+        class="flex flex-col gap-8"
+        :variants="stagger(0.1)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.medium"
+      >
+        <motion.div :variants="fadeUp">
+          <Eyebrow :text="cycle.eyebrow" />
+        </motion.div>
 
         <div class="flex flex-col gap-4">
-          <h2>
+          <motion.h2 :variants="fadeUp">
             {{ cycle.title }}
 
             <span v-if="cycle.accent" class="gradient-text block">
               {{ cycle.accent }}
             </span>
-          </h2>
+          </motion.h2>
 
-          <p v-if="cycle.text" class="max-w-3xl">
+          <motion.p v-if="cycle.text" class="max-w-3xl" :variants="fadeUp">
             {{ cycle.text }}
-          </p>
+          </motion.p>
         </div>
-      </div>
+      </motion.div>
 
-      <div
-        class="grid gap-4 grid-cols-2 lg:grid-cols-3"
+      <!-- Cycle -->
+      <motion.div
+        class="grid grid-cols-2 gap-4 lg:grid-cols-3"
         :class="cycleGridClass"
+        :variants="stagger(0.09, 0.05)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.early"
       >
-        <article
+        <motion.article
           v-for="(item, index) in cycle.items"
           :key="item.number"
-          class="flex flex-col gap-3 items-center justify-center text-center card relative"
+          class="card relative flex flex-col items-center justify-center gap-3 text-center"
+          :variants="fadeScale"
         >
-          <span
+          <motion.span
             class="absolute left-5 top-5 text-xs font-medium tracking-[0.2em] text-primary/60"
+            :variants="fade"
           >
             {{ item.number }}
-          </span>
+          </motion.span>
 
           <div class="icon size-16">
             <Icon :name="item.icon" class="size-8" />
@@ -297,45 +455,63 @@ const cycleGridClass = computed(() => {
             {{ item.text }}
           </p>
 
-          <Icon
+          <motion.div
             v-if="index < cycle.items.length - 1"
-            name="tabler:arrow-right"
-            class="absolute -right-4 top-1/2 z-20 hidden size-5 -translate-y-1/2 text-primary/40 xl:block"
-          />
-        </article>
-      </div>
+            class="absolute -right-4 top-1/2 z-20 hidden -translate-y-1/2 xl:block"
+            :variants="arrowVariants"
+          >
+            <Icon name="tabler:arrow-right" class="size-5 text-primary/40" />
+          </motion.div>
+        </motion.article>
+      </motion.div>
     </section>
 
     <!-- ========================================
          MECHANISMS
     ========================================= -->
     <section class="section flex flex-col gap-10">
-      <div class="grid gap-4 lg:grid-cols-2">
-        <div class="flex flex-col gap-8">
-          <Eyebrow :text="mechanisms.eyebrow" />
+      <motion.div
+        class="grid gap-4 lg:grid-cols-2"
+        :variants="stagger(0.1)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.medium"
+      >
+        <motion.div class="flex flex-col gap-8" :variants="stagger(0.1)">
+          <motion.div :variants="fadeUp">
+            <Eyebrow :text="mechanisms.eyebrow" />
+          </motion.div>
 
-          <h2>
+          <motion.h2 :variants="fadeUp">
             {{ mechanisms.title }}
 
             <span v-if="mechanisms.accent" class="gradient-text block">
               {{ mechanisms.accent }}
             </span>
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
-        <p
+        <motion.p
           v-if="mechanisms.text"
           class="max-w-xl lg:justify-self-end lg:self-end"
+          :variants="fadeUp"
         >
           {{ mechanisms.text }}
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <article
+      <motion.div
+        class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+        :variants="stagger(0.08, 0.05)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.default"
+      >
+        <motion.article
           v-for="item in mechanisms.items"
           :key="item.title"
           class="card flex flex-col gap-3"
+          :variants="fadeUp"
         >
           <div class="icon size-14">
             <Icon :name="item.icon" class="size-7" />
@@ -348,66 +524,95 @@ const cycleGridClass = computed(() => {
           <p class="text-sm text-text-muted/65">
             {{ item.text }}
           </p>
-        </article>
-      </div>
+        </motion.article>
+      </motion.div>
     </section>
 
     <!-- ========================================
          OPTIONAL HIGHLIGHT
     ========================================= -->
     <section v-if="highlight" class="section">
-      <div
-        class="relative overflow-hidden rounded-4xl border border-violet-300/15 bg-violet-950/15 p-8 md:p-10 lg:p-12 grid gap-8 lg:grid-cols-[auto_1fr] lg:items-center"
+      <motion.div
+        class="relative grid gap-8 overflow-hidden rounded-4xl border border-violet-300/15 bg-violet-950/15 p-8 md:p-10 lg:grid-cols-[auto_1fr] lg:items-center lg:p-12"
+        :variants="fadeScale"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.medium"
       >
-        <div class="-right-24 -top-24 size-80 glow-violet" />
+        <motion.div
+          class="-right-24 -top-24 size-80 glow-violet"
+          :initial="{ opacity: 0 }"
+          :while-in-view="{ opacity: 1 }"
+          :in-view-options="motionViewport.default"
+          :transition="{
+            duration: motionDuration.slow,
+            ease: motionEase.smooth,
+          }"
+        />
 
-        <div
+        <motion.div
           class="flex size-20 items-center justify-center rounded-full border border-violet-400/20 bg-violet-400/5 text-violet-300"
+          :variants="fadeScale"
         >
           <Icon :name="highlight.icon" class="size-12" />
-        </div>
+        </motion.div>
 
-        <div class="flex flex-col gap-4">
-          <h2>
+        <motion.div class="flex flex-col gap-4" :variants="stagger(0.1, 0.1)">
+          <motion.h2 :variants="fadeUp">
             {{ highlight.title }}
 
             <span v-if="highlight.accent" class="gradient-text">
               {{ highlight.accent }}
             </span>
-          </h2>
+          </motion.h2>
 
-          <p class="max-w-4xl">
+          <motion.p class="max-w-4xl" :variants="fadeUp">
             {{ highlight.text }}
-          </p>
-        </div>
-      </div>
+          </motion.p>
+        </motion.div>
+      </motion.div>
     </section>
 
     <!-- ========================================
          WORK
     ========================================= -->
     <section class="section flex flex-col gap-10">
-      <div class="flex flex-col gap-8">
-        <Eyebrow :text="work.eyebrow" />
+      <motion.div
+        class="flex flex-col gap-8"
+        :variants="stagger(0.1)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.medium"
+      >
+        <motion.div :variants="fadeUp">
+          <Eyebrow :text="work.eyebrow" />
+        </motion.div>
 
-        <h2>
+        <motion.h2 :variants="fadeUp">
           {{ work.title }}
 
           <span v-if="work.accent" class="gradient-text block">
             {{ work.accent }}
           </span>
-        </h2>
+        </motion.h2>
 
-        <p v-if="work.text" class="max-w-3xl">
+        <motion.p v-if="work.text" class="max-w-3xl" :variants="fadeUp">
           {{ work.text }}
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <article
+      <motion.div
+        class="grid gap-4 md:grid-cols-2 xl:grid-cols-4"
+        :variants="stagger(0.1, 0.05)"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.default"
+      >
+        <motion.article
           v-for="item in work.items"
           :key="item.number"
           class="card relative flex flex-col gap-3"
+          :variants="fadeScale"
         >
           <span
             class="absolute right-6 top-5 text-6xl font-light tracking-[-0.06em] text-primary/20"
@@ -426,45 +631,57 @@ const cycleGridClass = computed(() => {
           <p class="text-sm text-text-muted/65">
             {{ item.text }}
           </p>
-        </article>
-      </div>
+        </motion.article>
+      </motion.div>
     </section>
 
     <!-- ========================================
          RELATED
     ========================================= -->
     <section v-if="related" class="section">
-      <NuxtLink
-        :to="related.to"
-        class="group relative grid gap-8 overflow-hidden rounded-4xl border border-primary/20 bg-blue-950/25 p-8 transition-all duration-300 hover:border-primary/35 md:p-10 lg:grid-cols-[1fr_auto] lg:items-center lg:p-12"
+      <motion.div
+        :variants="fadeScale"
+        initial="hidden"
+        while-in-view="visible"
+        :in-view-options="motionViewport.medium"
       >
-        <div class="glow-blue -right-24 -top-24 size-80" />
+        <NuxtLink
+          :to="related.to"
+          class="group relative grid gap-8 overflow-hidden rounded-4xl border border-primary/20 bg-blue-950/25 p-8 transition-all duration-300 hover:border-primary/35 md:p-10 lg:grid-cols-[1fr_auto] lg:items-center lg:p-12"
+        >
+          <div class="glow-blue -right-24 -top-24 size-80" />
 
-        <div class="flex flex-col gap-8">
-          <Eyebrow :text="related.eyebrow" />
+          <motion.div class="flex flex-col gap-8" :variants="stagger(0.1, 0.1)">
+            <motion.div :variants="fadeUp">
+              <Eyebrow :text="related.eyebrow" />
+            </motion.div>
 
-          <h2>
-            {{ related.title }}
+            <motion.h2 :variants="fadeUp">
+              {{ related.title }}
 
-            <span v-if="related.accent" class="gradient-text">
-              {{ related.accent }}
-            </span>
-          </h2>
+              <span v-if="related.accent" class="gradient-text">
+                {{ related.accent }}
+              </span>
+            </motion.h2>
 
-          <p class="max-w-3xl">
-            {{ related.text }}
-          </p>
-        </div>
+            <motion.p class="max-w-3xl" :variants="fadeUp">
+              {{ related.text }}
+            </motion.p>
+          </motion.div>
 
-        <div class="flex items-center gap-2 font-medium text-primary">
-          {{ related.linkText }}
+          <motion.div
+            class="flex items-center gap-2 font-medium text-primary"
+            :variants="fadeLeft"
+          >
+            {{ related.linkText }}
 
-          <Icon
-            name="tabler:arrow-right"
-            class="size-5 transition-transform duration-300 group-hover:translate-x-2"
-          />
-        </div>
-      </NuxtLink>
+            <Icon
+              name="tabler:arrow-right"
+              class="size-5 transition-transform duration-300 group-hover:translate-x-2"
+            />
+          </motion.div>
+        </NuxtLink>
+      </motion.div>
     </section>
 
     <!-- ========================================

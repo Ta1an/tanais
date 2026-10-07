@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import { motion } from "motion-v";
 import Eyebrow from "../shared/eyebrow.vue";
+
+import {
+  fadeLeft,
+  fadeScale,
+  fadeUp,
+  motionViewport,
+  stagger,
+} from "~/utils/motion";
 
 const questions = [
   {
@@ -22,57 +31,83 @@ const questions = [
 
 <template>
   <section class="section relative">
-    <div
-      class="grid gap-10 lg:grid-cols-2 lg:items-center bg-bg/80 p-14 rounded-4xl shadow-(--glow-m) border border-border/20"
+    <motion.div
+      class="grid gap-10 rounded-4xl border border-border/20 bg-bg/80 p-6 shadow-(--glow-m) md:p-10 lg:grid-cols-2 lg:items-center lg:p-14"
+      :variants="fadeScale"
+      initial="hidden"
+      while-in-view="visible"
+      :in-view-options="motionViewport.default"
     >
-      <!-- left -->
-      <div class="flex flex-col gap-8">
-        <Eyebrow text="для родственников" />
+      <!-- Left -->
+      <motion.div
+        class="flex flex-col gap-8"
+        :variants="stagger(0.1, 0.1)"
+      >
+        <motion.div :variants="fadeUp">
+          <Eyebrow text="для родственников" />
+        </motion.div>
 
-        <h2>
+        <motion.h2 :variants="fadeUp">
           Если зависимость у близкого —
-          <span class="gradient-text"> помощь может быть нужна и вам. </span>
-        </h2>
 
-        <p class="max-w-xl leading-relaxed">
+          <span class="gradient-text">
+            помощь может быть нужна и вам.
+          </span>
+        </motion.h2>
+
+        <motion.p
+          class="max-w-xl leading-relaxed"
+          :variants="fadeUp"
+        >
           Родные часто годами живут между надеждой, страхом, контролем и
           попытками спасти человека. В такой ситуации помощь может быть нужна не
           только самому зависимому.
-        </p>
+        </motion.p>
 
-        <div class="flex flex-wrap gap-3">
-          <NuxtLink to="/directions/codependency" class="button button-primary">
+        <motion.div
+          class="flex flex-wrap gap-3"
+          :variants="fadeUp"
+        >
+          <NuxtLink
+            to="/directions/codependency"
+            class="button button-primary"
+          >
             Помощь родственникам
           </NuxtLink>
 
-          <NuxtLink to="/contacts" class="button button-outline">
+          <NuxtLink
+            to="/contacts"
+            class="button button-outline"
+          >
             Обсудить ситуацию
           </NuxtLink>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <!-- right -->
-      <div class="grid gap-4">
-        <article
+      <!-- Right -->
+      <motion.div
+        class="grid gap-4"
+        :variants="stagger(0.1, 0.15)"
+      >
+        <motion.article
           v-for="question in questions"
           :key="question.title"
-          class="group flex gap-5 card bg-bg-light/30"
+          class="group card flex gap-5 bg-bg-light/30"
+          :variants="fadeLeft"
         >
           <div class="icon">
             <Icon :name="question.icon" class="size-7" />
           </div>
 
           <div>
-            <h3>
-              {{ question.title }}
-            </h3>
+            <h3>{{ question.title }}</h3>
 
-            <p class="text-sm mt-2">
+            <p class="mt-2 text-sm">
               {{ question.text }}
             </p>
           </div>
-        </article>
-      </div>
-    </div>
+        </motion.article>
+      </motion.div>
+    </motion.div>
   </section>
 </template>
