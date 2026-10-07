@@ -21,9 +21,9 @@ const links = [
   {
     title: "Материалы",
     links: [
-      { label: "Статьи", to: "/materials/articles" },
-      { label: "Видео", to: "/materials/videos" },
-      { label: "Подкасты", to: "/materials/podcasts" },
+      { label: "Статьи", to: "/materials" },
+      { label: "Видео", to: "/materials" },
+      { label: "Подкасты", to: "/materials" },
     ],
   },
 ];
