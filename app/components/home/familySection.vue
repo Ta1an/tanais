@@ -32,7 +32,7 @@ const questions = [
 <template>
   <section class="section relative">
     <motion.div
-      class="grid gap-10 rounded-4xl border border-border/20 bg-bg/80 p-6 shadow-(--glow-m) md:p-10 lg:grid-cols-2 lg:items-center lg:p-14"
+      class="grid gap-10 rounded-4xl border border-border/20 bg-bg/80 shadow-(--glow-m) p-10 lg:grid-cols-2 lg:items-center lg:p-14"
       :variants="fadeScale"
       initial="hidden"
       while-in-view="visible"
@@ -40,7 +40,7 @@ const questions = [
     >
       <!-- Left -->
       <motion.div
-        class="flex flex-col gap-8"
+        class="flex flex-col gap-6 sm:gap-8"
         :variants="stagger(0.1, 0.1)"
       >
         <motion.div :variants="fadeUp">
@@ -65,7 +65,7 @@ const questions = [
         </motion.p>
 
         <motion.div
-          class="flex flex-wrap gap-3"
+          class="flex flex-wrap gap-3 sm:gap-4"
           :variants="fadeUp"
         >
           <NuxtLink
@@ -86,7 +86,7 @@ const questions = [
 
       <!-- Right -->
       <motion.div
-        class="grid gap-4"
+        class="grid gap-3 sm:gap-4"
         :variants="stagger(0.1, 0.15)"
       >
         <motion.article

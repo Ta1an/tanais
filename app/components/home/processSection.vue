@@ -72,7 +72,7 @@ function getStepProps(step: (typeof steps)[number]) {
   >
     <!-- Header -->
     <motion.div
-      class="grid gap-8 lg:grid-cols-[1fr_0.5fr]"
+      class="grid gap-8 sm:gap-6 lg:grid-cols-[1fr_0.5fr]"
       :variants="stagger(0.1)"
       initial="hidden"
       while-in-view="visible"

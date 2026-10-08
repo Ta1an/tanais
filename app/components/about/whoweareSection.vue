@@ -14,7 +14,7 @@ import {
 
 <template>
   <motion.section
-    class="section grid gap-8 lg:grid-cols-[0.5fr_1fr_0.5fr]"
+    class="section grid gap-6 sm:gap-8 lg:grid-cols-[0.5fr_1fr_0.5fr]"
     :variants="stagger(0.1)"
     initial="hidden"
     while-in-view="visible"
@@ -33,7 +33,7 @@ import {
     </motion.h2>
 
     <!-- Text -->
-    <motion.div class="flex flex-col gap-4" :variants="stagger(0.08)">
+    <motion.div class="flex flex-col gap-3 sm:gap-4" :variants="stagger(0.08)">
       <motion.p :variants="fadeUp">
         TANAIS — центр психологической помощи, в котором работа строится вокруг
         понимания конкретного человека, его состояния, жизненной ситуации и

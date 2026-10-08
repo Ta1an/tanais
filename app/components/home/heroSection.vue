@@ -245,7 +245,7 @@ const signatureVariants = {
 
     <!-- Bottom detail -->
     <motion.div
-      class="justify-self-center pt-5 text-center text-[10px] uppercase tracking-[0.2em] text-white/25 sm:text-xs sm:tracking-[0.3em] lg:col-span-2 lg:tracking-[0.4em]"
+      class="justify-self-center pt-5 text-center text-[10px] uppercase tracking-[0.2em] text-white/25 sm:text-xs lg:col-span-2 lg:tracking-[0.4em]"
       :initial="{ opacity: 0 }"
       :animate="{ opacity: 1 }"
       :transition="{

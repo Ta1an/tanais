@@ -74,7 +74,7 @@ const aboutImage = `${config.app.baseURL}img/about.jpg`;
          LEFT
     ====================================== -->
     <motion.div
-      class="flex flex-col gap-8"
+      class="flex flex-col gap-6 sm:gap-8"
       :variants="stagger(0.1, 0.1)"
       initial="hidden"
       animate="visible"
@@ -98,7 +98,7 @@ const aboutImage = `${config.app.baseURL}img/about.jpg`;
       </motion.p>
 
       <!-- Actions -->
-      <motion.div class="flex flex-wrap gap-3" :variants="fadeUp">
+      <motion.div class="flex flex-wrap gap-3 sm:gap-4" :variants="fadeUp">
         <NuxtLink to="/directions" class="button button-primary">
           Направления работы
 
@@ -112,7 +112,7 @@ const aboutImage = `${config.app.baseURL}img/about.jpg`;
 
       <!-- Trust -->
       <motion.div
-        class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text-muted/65"
+        class="flex flex-wrap items-center gap-3 text-sm text-text-muted/65"
         :variants="stagger(0.07)"
       >
         <motion.span class="flex items-center gap-2" :variants="fadeUp">

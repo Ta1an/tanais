@@ -83,7 +83,7 @@ const horizontalLineVariants = {
 <template>
   <section id="directions" class="section flex flex-col gap-10">
     <!-- Header -->
-    <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:gap-12">
+    <div class="grid lg:grid-cols-[1fr_auto]">
       <motion.div
         class="flex flex-col gap-6 sm:gap-8"
         :variants="stagger(0.1)"
@@ -137,7 +137,7 @@ const horizontalLineVariants = {
 
     <!-- Cards -->
     <motion.div
-      class="grid grid-cols-1 gap-6 lg:grid-cols-2"
+      class="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2"
       :variants="stagger(0.12)"
       initial="hidden"
       while-in-view="visible"
@@ -162,10 +162,10 @@ const horizontalLineVariants = {
           </h3>
 
           <div
-            class="relative flex size-20 shrink-0 items-center justify-center justify-self-end rounded-full border border-blue-400/10 bg-blue-500/5 text-primary shadow-[0_0_40px_rgb(14_165_233/0.08)] transition-all duration-500 sm:size-22 md:size-26 lg:size-28 group-hover:scale-105 group-hover:border-violet-400/20 group-hover:text-violet-400"
+            class="relative flex size-20 shrink-0 items-center justify-center justify-self-end rounded-full border border-blue-400/10 bg-blue-500/5 text-primary shadow-[0_0_40px_rgb(14_165_233/0.08)] transition-all duration-500 sm:size-22 md:size-24 lg:size-26 group-hover:scale-105 group-hover:border-violet-400/20 group-hover:text-violet-400"
           >
             <div
-              class="absolute inset-2 rounded-full border border-blue-400/8"
+              class="absolute inset-3 rounded-full border border-blue-400/8"
             />
 
             <Icon
@@ -209,7 +209,7 @@ const horizontalLineVariants = {
         class="card grid gap-3 md:grid-flow-col md:grid-cols-[auto_1fr_auto] md:items-center md:gap-x-5 md:gap-y-0 lg:col-span-2"
         :variants="fadeUp"
       >
-        <div class="icon row-span-2 hidden size-12 md:flex">
+        <div class="icon row-span-2 size-12 flex">
           <Icon name="tabler:plus" class="size-5" />
         </div>
 

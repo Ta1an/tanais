@@ -68,7 +68,7 @@ const trustItems = computed(() => {
 
     <!-- Panel -->
     <motion.div
-      class="relative z-10 flex flex-col items-center justify-center rounded-4xl border border-border/20 bg-bg/80 p-6 text-center shadow-(--glow-m) md:p-10 lg:p-14"
+      class="relative z-10 flex flex-col items-center justify-center rounded-4xl border border-border/20 bg-bg/80 p-6 text-center shadow-(--glow-m) p-10 lg:p-14"
       :variants="fadeScale"
       initial="hidden"
       while-in-view="visible"

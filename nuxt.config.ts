@@ -9,6 +9,11 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
+  nitro: {
+    externals: {
+      inline: [/[\\/]node_modules[\\/]nuxt[\\/]dist[\\/]/],
+    },
+  },
 
   css: ["@/assets/css/main.css"],
   modules: ["@nuxt/icon", "@nuxt/fonts", "motion-v/nuxt"],

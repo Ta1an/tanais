@@ -110,7 +110,7 @@ const lineRightVariants = {
          HEADER
     ========================================== -->
     <motion.div
-      class="grid gap-8 lg:grid-cols-[1fr_0.75fr] lg:items-end"
+      class="grid gap-6 sm:gap-8 lg:grid-cols-[1fr_0.75fr] lg:items-end"
       :variants="stagger(0.1)"
       initial="hidden"
       while-in-view="visible"
@@ -140,7 +140,7 @@ const lineRightVariants = {
     ========================================== -->
     <div class="relative">
       <motion.div
-        class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6"
+        class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
         :variants="stagger(0.09, 0.05)"
         initial="hidden"
         while-in-view="visible"
@@ -162,7 +162,7 @@ const lineRightVariants = {
 
           <!-- Icon -->
           <motion.div
-            class="icon size-18 rounded-full"
+            class="icon size-16 md:size-17 lg:size-18 rounded-full"
             :variants="{
               hidden: {
                 opacity: 0,
@@ -180,7 +180,7 @@ const lineRightVariants = {
               },
             }"
           >
-            <Icon :name="item.icon" class="size-10" />
+            <Icon :name="item.icon" class="size-8 md:size-9 lg:size-10" />
           </motion.div>
 
           <h4>
@@ -190,7 +190,7 @@ const lineRightVariants = {
           <!-- Arrow -->
           <motion.div
             v-if="index < mechanism.length - 1"
-            class="absolute -right-5 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center xl:flex"
+            class="absolute -right-5 top-1/2 z-20 hidden -translate-y-1/2 items-center justify-center lg:flex"
             :variants="{
               hidden: {
                 opacity: 0,

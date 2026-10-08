@@ -121,7 +121,7 @@ const mechanismArrows = [
 
 <template>
   <section id="mechanism" class="section flex flex-col gap-10">
-    <div class="grid items-center gap-8 lg:grid-cols-2">
+    <div class="grid items-center lg:grid-cols-2">
       <!-- Left -->
       <motion.div
         class="flex flex-col gap-6 sm:gap-8"
@@ -171,7 +171,7 @@ const mechanismArrows = [
 
       <!-- Desktop mechanism -->
       <motion.div
-        class="relative hidden min-h-160 aspect-square items-center justify-center lg:flex"
+        class="relative hidden min-h-120 aspect-square items-center justify-center lg:flex"
         initial="hidden"
         while-in-view="visible"
         :in-view-options="motionViewport.medium"
@@ -191,12 +191,12 @@ const mechanismArrows = [
 
         <!-- Rings -->
         <div
-          v-for="(size, index) in [320, 450, 580]"
+          v-for="(size, index) in [45, 65, 85]"
           :key="size"
-          class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          class="absolute left-1/2 top-1/2 bg-ring -translate-x-1/2 -translate-y-1/2"
           :style="{
-            width: `${size}px`,
-            height: `${size}px`,
+            width: `${size}%`,
+            height: `${size}%`,
           }"
         >
           <motion.div
@@ -331,12 +331,12 @@ const mechanismArrows = [
         <motion.div
           v-for="item in mechanism"
           :key="`mobile-${item.title}`"
-          class="card flex flex-col items-center justify-center"
+          class="card flex flex-col items-center gap-2 sm:gap-3 justify-center"
           :variants="fadeUp"
         >
           <Icon
             :name="item.icon"
-            class="mb-2 size-7 text-primary sm:mb-3 sm:size-8"
+            class="size-7 text-primary sm:size-8"
           />
 
           <span class="text-sm font-medium text-text">
@@ -359,7 +359,7 @@ const mechanismArrows = [
 
     <!-- Examples -->
     <motion.div
-      class="grid gap-4 md:grid-cols-3"
+      class="grid gap-3 sm:gap-4 lg:grid-cols-3"
       :variants="stagger(0.1)"
       initial="hidden"
       while-in-view="visible"

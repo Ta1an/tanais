@@ -87,7 +87,7 @@
 
 @layer components {
   .section {
-    @apply px-4 py-16 sm:px-6 md:px-[8%] md:py-[6%] lg:px-[10%] lg:py-[4%] scroll-mt-28;
+    @apply px-4 py-12 md:px-[8%] md:py-[6%] lg:px-[10%] lg:py-[4%] scroll-mt-28;
   }
 
   .top-section {
