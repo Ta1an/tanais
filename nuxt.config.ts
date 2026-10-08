@@ -2,7 +2,7 @@
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
   vite: {
@@ -19,19 +19,27 @@ export default defineNuxtConfig({
   modules: ["@nuxt/icon", "@nuxt/fonts", "motion-v/nuxt"],
 
   icon: {
-    mode: 'css',
-    cssLayer: 'base'
+    mode: "css",
+    cssLayer: "base",
   },
 
   fonts: {
     defaults: {
-      subsets: [
-        'cyrillic-ext',
-        'cyrillic',
-      ]
+      subsets: ["cyrillic-ext", "cyrillic"],
     },
     families: [
-      {name: 'M PLUS 1p', provider: 'google'},
-    ]
-  }
-})
+      {
+        name: "Onest",
+        provider: "google",
+        weights: ["400 500 600 700"],
+        styles: ["normal"],
+      },
+      {
+        name: "Golos Text",
+        provider: "google",
+        weights: ["400 700"],
+        styles: ["normal"],
+      },
+    ],
+  },
+});

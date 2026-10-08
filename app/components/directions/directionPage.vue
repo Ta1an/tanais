@@ -227,7 +227,7 @@ const cycleGridClass = computed(() => {
           {{ hero.intro }}
         </motion.p>
 
-        <motion.div class="flex flex-wrap gap-3" :variants="fadeUp">
+        <motion.div class="flex flex-wrap gap-3 sm:gap-4" :variants="fadeUp">
           <NuxtLink
             :to="hero.primaryButton?.to ?? '/contacts'"
             class="button button-primary"
@@ -332,7 +332,7 @@ const cycleGridClass = computed(() => {
     <section class="section flex flex-col gap-10">
       <!-- Header -->
       <motion.div
-        class="grid gap-8 lg:grid-cols-2"
+        class="grid gap-6 sm:gap-8 lg:grid-cols-2"
         :variants="stagger(0.1)"
         initial="hidden"
         while-in-view="visible"
@@ -363,7 +363,7 @@ const cycleGridClass = computed(() => {
 
       <!-- Cards -->
       <motion.div
-        class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+        class="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3"
         :variants="stagger(0.08, 0.05)"
         initial="hidden"
         while-in-view="visible"
@@ -423,7 +423,7 @@ const cycleGridClass = computed(() => {
 
       <!-- Cycle -->
       <motion.div
-        class="grid grid-cols-2 gap-4 lg:grid-cols-3"
+        class="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3"
         :class="cycleGridClass"
         :variants="stagger(0.09, 0.05)"
         initial="hidden"
@@ -471,7 +471,7 @@ const cycleGridClass = computed(() => {
     ========================================= -->
     <section class="section flex flex-col gap-10">
       <motion.div
-        class="grid gap-4 lg:grid-cols-2"
+        class="grid gap-3 sm:gap-4 lg:grid-cols-2"
         :variants="stagger(0.1)"
         initial="hidden"
         while-in-view="visible"
@@ -501,7 +501,7 @@ const cycleGridClass = computed(() => {
       </motion.div>
 
       <motion.div
-        class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+        class="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3"
         :variants="stagger(0.08, 0.05)"
         initial="hidden"
         while-in-view="visible"
@@ -533,7 +533,7 @@ const cycleGridClass = computed(() => {
     ========================================= -->
     <section v-if="highlight" class="section">
       <motion.div
-        class="relative grid gap-8 overflow-hidden rounded-4xl border border-violet-300/15 bg-violet-950/15 p-8 md:p-10 lg:grid-cols-[auto_1fr] lg:items-center lg:p-12"
+        class="relative grid gap-6 sm:gap-8 overflow-hidden rounded-4xl border border-violet-300/15 bg-violet-950/15 p-8 md:p-10 lg:grid-cols-[auto_1fr] lg:items-center lg:p-12"
         :variants="fadeScale"
         initial="hidden"
         while-in-view="visible"
@@ -557,7 +557,7 @@ const cycleGridClass = computed(() => {
           <Icon :name="highlight.icon" class="size-12" />
         </motion.div>
 
-        <motion.div class="flex flex-col gap-4" :variants="stagger(0.1, 0.1)">
+        <motion.div class="flex flex-col gap-3 sm:gap-4" :variants="stagger(0.1, 0.1)">
           <motion.h2 :variants="fadeUp">
             {{ highlight.title }}
 
@@ -578,7 +578,7 @@ const cycleGridClass = computed(() => {
     ========================================= -->
     <section class="section flex flex-col gap-10">
       <motion.div
-        class="flex flex-col gap-8"
+        class="flex flex-col gap-3 sm:gap-8"
         :variants="stagger(0.1)"
         initial="hidden"
         while-in-view="visible"
@@ -602,7 +602,7 @@ const cycleGridClass = computed(() => {
       </motion.div>
 
       <motion.div
-        class="grid gap-4 md:grid-cols-2 xl:grid-cols-4"
+        class="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-4"
         :variants="stagger(0.1, 0.05)"
         initial="hidden"
         while-in-view="visible"
@@ -647,11 +647,11 @@ const cycleGridClass = computed(() => {
       >
         <NuxtLink
           :to="related.to"
-          class="group relative grid gap-8 overflow-hidden rounded-4xl border border-primary/20 bg-blue-950/25 p-8 transition-all duration-300 hover:border-primary/35 md:p-10 lg:grid-cols-[1fr_auto] lg:items-center lg:p-12"
+          class="group relative grid gap-6 sm:gap-8 overflow-hidden rounded-4xl border border-primary/20 bg-blue-950/25 p-8 transition-all duration-300 hover:border-primary/35 md:p-10 lg:grid-cols-[1fr_auto] lg:items-center lg:p-12"
         >
           <div class="glow-blue -right-24 -top-24 size-80" />
 
-          <motion.div class="flex flex-col gap-8" :variants="stagger(0.1, 0.1)">
+          <motion.div class="flex flex-col gap-6 sm:gap-8" :variants="stagger(0.1, 0.1)">
             <motion.div :variants="fadeUp">
               <Eyebrow :text="related.eyebrow" />
             </motion.div>

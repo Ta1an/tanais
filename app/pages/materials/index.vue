@@ -228,7 +228,7 @@ const sideLineVariants = {
     ========================================== -->
   <section class="section flex flex-col gap-10">
     <motion.div
-      class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      class="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-end md:justify-between"
       :variants="stagger(0.1)"
       initial="hidden"
       while-in-view="visible"
@@ -245,7 +245,7 @@ const sideLineVariants = {
     </motion.div>
 
     <motion.div
-      class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5"
+      class="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5"
       :variants="stagger(0.06, 0.05)"
       initial="hidden"
       while-in-view="visible"
@@ -281,7 +281,7 @@ const sideLineVariants = {
       <AnimatePresence mode="wait" :initial="false">
         <motion.div
           :key="activeFilter"
-          class="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+          class="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3"
           :initial="{
             opacity: 0,
             y: 10,
@@ -305,7 +305,7 @@ const sideLineVariants = {
             class="group card card-hover grid h-full grid-rows-[auto_auto_1fr_auto_auto]"
           >
             <!-- Header -->
-            <div class="flex items-start justify-between gap-5">
+            <div class="flex items-start justify-between gap-3 sm:gap-4">
               <div
                 class="icon size-16 transition-colors duration-300 group-hover:text-violet-400"
               >
@@ -338,7 +338,7 @@ const sideLineVariants = {
             </p>
 
             <!-- Footer -->
-            <div class="flex items-end justify-between gap-5 pt-8">
+            <div class="flex items-end justify-between gap-3 sm:gap-4 pt-8">
               <span class="text-xs text-text-muted/45">
                 {{ material.meta }}
               </span>
@@ -400,7 +400,7 @@ const sideLineVariants = {
     </AnimatePresence>
 
     <motion.div
-      class="card flex flex-col gap-6 rounded-3xl border md:flex-row md:items-center"
+      class="card flex flex-col gap-3 sm:gap-4 rounded-3xl border md:flex-row md:items-center"
       :variants="fadeScale"
       initial="hidden"
       while-in-view="visible"

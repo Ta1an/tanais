@@ -121,7 +121,7 @@ const visualIconVariants = {
     >
       <!-- Left -->
       <motion.div
-        class="flex flex-col gap-8"
+        class="flex flex-col gap-6 sm:gap-8"
         :variants="stagger(0.1, 0.1)"
         initial="hidden"
         animate="visible"
@@ -130,7 +130,7 @@ const visualIconVariants = {
           <Eyebrow text="Зависимости" />
         </motion.div>
 
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-3 sm:gap-4">
           <motion.h1 :variants="fadeUp">
             Зависимость —
 
@@ -193,7 +193,7 @@ const visualIconVariants = {
     ========================================= -->
     <section class="section flex flex-col gap-10">
       <motion.div
-        class="grid gap-8 lg:grid-cols-2"
+        class="grid gap-6 sm:gap-8 lg:grid-cols-2"
         :variants="stagger(0.1)"
         initial="hidden"
         while-in-view="visible"
@@ -311,7 +311,7 @@ const visualIconVariants = {
     ========================================= -->
     <section class="section flex flex-col gap-10">
       <motion.div
-        class="grid gap-8 lg:grid-cols-2"
+        class="grid gap-6 sm:gap-8 lg:grid-cols-2"
         :variants="stagger(0.1)"
         initial="hidden"
         while-in-view="visible"
@@ -340,7 +340,7 @@ const visualIconVariants = {
       </motion.div>
 
       <motion.div
-        class="grid gap-4 lg:grid-cols-2"
+        class="grid gap-3 sm:gap-4 lg:grid-cols-2"
         :variants="stagger(0.12, 0.05)"
         initial="hidden"
         while-in-view="visible"
@@ -413,7 +413,7 @@ const visualIconVariants = {
       </motion.div>
 
       <motion.div
-        class="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+        class="grid gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4"
         :variants="stagger(0.09, 0.05)"
         initial="hidden"
         while-in-view="visible"
@@ -453,7 +453,7 @@ const visualIconVariants = {
       >
         <!-- Content -->
         <motion.div
-          class="flex flex-col items-start gap-8"
+          class="flex flex-col items-start gap-6 sm:gap-8"
           :variants="stagger(0.1, 0.1)"
         >
           <motion.div :variants="fadeUp">

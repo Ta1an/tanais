@@ -160,7 +160,7 @@ const directionIconVariants = {
     <section class="section flex flex-col gap-10">
       <!-- Header -->
       <motion.div
-        class="grid gap-8 lg:grid-cols-2"
+        class="grid gap-6 sm:gap-8 lg:grid-cols-2"
         :variants="stagger(0.1)"
         initial="hidden"
         while-in-view="visible"
@@ -199,7 +199,7 @@ const directionIconVariants = {
            CARDS
       ========================================== -->
       <motion.div
-        class="grid gap-4 lg:grid-cols-2"
+        class="grid gap-3 sm:gap-4 lg:grid-cols-2"
         :variants="stagger(0.12, 0.05)"
         initial="hidden"
         while-in-view="visible"

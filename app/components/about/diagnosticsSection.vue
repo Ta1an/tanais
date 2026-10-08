@@ -76,7 +76,7 @@ const numberVariants = {
            LEFT
       ====================================== -->
       <motion.div
-        class="flex flex-col gap-8 border-b border-blue-300/10 p-7 md:p-10 lg:border-b-0 lg:border-r lg:p-12"
+        class="flex flex-col gap-6 sm:gap-8 border-b border-blue-300/10 p-10 lg:border-b-0 lg:border-r lg:p-14"
         :variants="stagger(0.1, 0.05)"
       >
         <motion.div :variants="fadeUp">

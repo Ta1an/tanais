@@ -160,7 +160,7 @@ const heroCardVariants = {
           шаг.
         </motion.p>
 
-        <motion.div class="flex flex-wrap gap-4" :variants="fadeUp">
+        <motion.div class="flex flex-wrap gap-3 sm:gap-4" :variants="fadeUp">
           <a
             :href="`https://wa.me/${contacts.whatsappRaw}`"
             target="_blank"
@@ -182,7 +182,7 @@ const heroCardVariants = {
 
       <!-- Right -->
       <motion.div
-        class="card hidden flex-col gap-3 lg:flex lg:justify-end"
+        class="card hidden flex-col gap-3 sm:gap-4 lg:flex lg:justify-end"
         :variants="heroCardVariants"
         initial="hidden"
         animate="visible"
@@ -233,7 +233,7 @@ const heroCardVariants = {
         </motion.p>
 
         <motion.div
-          class="flex items-center gap-3 border-t border-blue-300/10 pt-4"
+          class="flex items-center gap-3 sm:gap-4 border-t border-blue-300/10 pt-4"
           :initial="{ opacity: 0 }"
           :animate="{ opacity: 1 }"
           :transition="{
@@ -266,7 +266,7 @@ const heroCardVariants = {
         :href="item.href"
         :target="item.external ? '_blank' : undefined"
         :rel="item.external ? 'noopener noreferrer' : undefined"
-        class="group card card-hover grid gap-3"
+        class="group card card-hover grid gap-3 sm:gap-4"
         :variants="fadeScale"
       >
         <div
@@ -309,7 +309,7 @@ const heroCardVariants = {
              FORM
         ====================================== -->
         <motion.div
-          class="flex flex-col gap-4 border-b border-blue-300/10 p-7 md:p-10 lg:border-b-0 lg:border-r lg:p-12"
+          class="flex flex-col gap-3 sm:gap-4 border-b border-blue-300/10 p-7 md:p-10 lg:border-b-0 lg:border-r lg:p-12"
           :variants="stagger(0.08, 0.1)"
         >
           <motion.div :variants="fadeUp">
@@ -323,12 +323,12 @@ const heroCardVariants = {
           </motion.h3>
 
           <motion.form
-            class="grid gap-4"
+            class="grid gap-3 sm:gap-4"
             :variants="stagger(0.07, 0.05)"
             @submit.prevent="sendToWhatsApp"
           >
             <!-- Name + Phone -->
-            <motion.div class="grid gap-4 md:grid-cols-2" :variants="fadeUp">
+            <motion.div class="grid gap-3 sm:gap-4 md:grid-cols-2" :variants="fadeUp">
               <label class="flex flex-col gap-2">
                 <span class="text-sm text-text-muted/70">
                   Как к вам обращаться
@@ -418,7 +418,7 @@ const heroCardVariants = {
              INFO
         ====================================== -->
         <motion.div
-          class="flex flex-col gap-4 p-7 md:p-10 lg:p-12"
+          class="flex flex-col gap-3 sm:gap-4 p-7 md:p-10 lg:p-12"
           :variants="stagger(0.08, 0.15)"
         >
           <motion.div :variants="fadeUp">

@@ -217,14 +217,14 @@ const lineRightVariants = {
          SYSTEM PHRASE
     ========================================== -->
     <motion.div
-      class="mx-auto my-10 flex max-w-3xl items-center justify-center gap-5 text-center"
+      class="mx-auto hidden my-10 lg:flex max-w-3xl items-center justify-center gap-5 text-center"
       :variants="stagger(0.1)"
       initial="hidden"
       while-in-view="visible"
       :in-view-options="motionViewport.late"
     >
       <motion.div
-        class="hidden h-0.5 w-20 origin-right bg-linear-to-r from-transparent to-primary/80 md:block"
+        class="h-0.5 w-20 origin-right bg-linear-to-r from-transparent to-primary/80 md:block"
         :variants="lineLeftVariants"
       />
 
@@ -242,7 +242,7 @@ const lineRightVariants = {
          PRINCIPLES
     ========================================== -->
     <motion.div
-      class="grid gap-4 md:grid-cols-2"
+      class="grid gap-3 sm:gap-4 md:grid-cols-2"
       :variants="stagger(0.1)"
       initial="hidden"
       while-in-view="visible"
