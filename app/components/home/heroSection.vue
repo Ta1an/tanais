@@ -46,27 +46,6 @@ const photoLabelVariants = {
   },
 };
 
-// Floating card
-const floatingCardVariants = {
-  hidden: {
-    opacity: 0,
-    x: -18,
-    y: 10,
-  },
-
-  visible: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-
-    transition: {
-      duration: motionDuration.normal,
-      delay: 0.7,
-      ease: motionEase.smooth,
-    },
-  },
-};
-
 // Декоративная подпись
 const signatureVariants = {
   hidden: {
@@ -99,19 +78,19 @@ const signatureVariants = {
       animate="visible"
     >
       <motion.div :variants="fadeUp">
-        <Eyebrow text="центр психологической помощи" />
+        <Eyebrow text="Игровая зависимость · Созависимость" />
       </motion.div>
 
       <div class="flex flex-col gap-3 sm:gap-4">
         <motion.h1 :variants="fadeUp">
-          Понять себя.
+          Игровая зависимость -
 
-          <span class="gradient-text block"> Изменить жизнь. </span>
+          <span class="gradient-text block">это не просто игра</span>
         </motion.h1>
 
         <motion.p :variants="fadeUp" class="max-w-xl">
-          Помогаем разобраться в причинах состояния, увидеть механизм проблемы и
-          выстроить персональный путь изменений.
+          Разбираем, что снова возвращает человека в игровой цикл, даже когда он
+          понимает последствия и хочет остановиться.
         </motion.p>
       </div>
 
@@ -120,10 +99,10 @@ const signatureVariants = {
         class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4"
       >
         <NuxtLink to="/contacts" class="button button-primary">
-          Записаться на консультацию
+          Обсудить ситуацию
         </NuxtLink>
 
-        <a href="#process" class="button button-outline"> Как мы работаем </a>
+        <NuxtLink to="/directions/addictions/gambling" class="button button-outline">Об игровой зависимости</NuxtLink>
       </motion.div>
 
       <motion.div
@@ -211,26 +190,6 @@ const signatureVariants = {
           alt="Команда психологического центра TANAIS"
           class="block h-auto w-full object-cover"
         />
-      </motion.div>
-
-      <!-- Floating info card -->
-      <motion.div
-        class="absolute bottom-[10%] left-[-5%] z-10 flex items-center gap-3 card bg-bg/80 p-4 backdrop-blur-xl shadow-(--glow-m)"
-        :variants="floatingCardVariants"
-        initial="hidden"
-        animate="visible"
-      >
-        <div class="icon size-10">
-          <Icon name="tabler:heart-handshake" />
-        </div>
-
-        <div>
-          <span class="text-sm font-semibold"> Главное в нашей работе </span>
-
-          <span class="mt-1 block text-xs text-text-muted">
-            Внимание к каждому человеку
-          </span>
-        </div>
       </motion.div>
 
       <motion.span
