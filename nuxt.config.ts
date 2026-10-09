@@ -19,8 +19,11 @@ export default defineNuxtConfig({
   modules: ["@nuxt/icon", "@nuxt/fonts", "motion-v/nuxt"],
 
   icon: {
-    mode: "css",
-    cssLayer: "base",
+    provider: "none",
+
+    clientBundle: {
+      scan: true,
+    },
   },
 
   fonts: {
