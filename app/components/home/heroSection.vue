@@ -68,7 +68,7 @@ const signatureVariants = {
 
 <template>
   <section
-    class="relative grid grid-cols-1 lg:grid-cols-2 min-h-svh items-center section top-section"
+    class="relative grid grid-cols-1 gap-10 lg:grid-cols-2 min-h-svh items-center section top-section"
   >
     <!-- Left -->
     <motion.div
@@ -83,7 +83,7 @@ const signatureVariants = {
 
       <div class="flex flex-col gap-3 sm:gap-4">
         <motion.h1 :variants="fadeUp">
-          Игровая зависимость -
+          Игровая зависимость 
 
           <span class="gradient-text block">это не просто игра</span>
         </motion.h1>
