@@ -121,7 +121,7 @@ const mechanismArrows = [
 
 <template>
   <section id="mechanism" class="section flex flex-col gap-10">
-    <div class="grid items-center lg:grid-cols-2">
+    <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-2">
       <!-- Left -->
       <motion.div
         class="flex flex-col gap-6 sm:gap-8"
