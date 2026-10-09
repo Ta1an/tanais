@@ -59,69 +59,7 @@ const filters = [
   },
 ] as const;
 
-const materials: Material[] = [
-  {
-    title: "Есть ли признаки проблемного игрового поведения?",
-    description:
-      "Короткая самооценка, которая поможет обратить внимание на потерю контроля, последствия и повторяемость игрового поведения.",
-    type: "test",
-    category: "Зависимость",
-    icon: "tabler:device-gamepad-2",
-    to: "/materials/tests/gambling",
-    meta: "5–7 минут",
-    featured: true,
-  },
-  {
-    title: "Как формируется зависимость",
-    description:
-      "Разбираем цикл подкрепления, эмоциональную регуляцию и причины, по которым одного решения «больше не делать» часто недостаточно.",
-    type: "video",
-    category: "Зависимость",
-    icon: "tabler:player-play",
-    to: "/materials/videos/how-addiction-forms",
-    meta: "12 минут",
-  },
-  {
-    title: "Тревога или реакция нервной системы?",
-    description:
-      "Материал о том, почему тело может продолжать реагировать даже тогда, когда человек понимает, что объективной опасности нет.",
-    type: "article",
-    category: "Тревога",
-    icon: "tabler:activity-heartbeat",
-    to: "/materials/articles/anxiety-nervous-system",
-    meta: "8 минут чтения",
-  },
-  {
-    title: "Насколько вы вовлечены в жизнь зависимого?",
-    description:
-      "Самооценка для родственников: контроль, спасательство, чувство ответственности и нарушение собственных границ.",
-    type: "test",
-    category: "Созависимость",
-    icon: "tabler:heart-handshake",
-    to: "/materials/tests/codependency",
-    meta: "5 минут",
-  },
-  {
-    title: "Что делать родственникам после срыва",
-    description:
-      "Практический алгоритм: что имеет смысл делать, а какие действия могут непреднамеренно поддерживать прежний сценарий.",
-    type: "guide",
-    category: "Для родственников",
-    icon: "tabler:route",
-    to: "/materials/guides/after-relapse",
-    meta: "Пошаговый материал",
-  },
-  {
-    title: "Почему контроль усиливает сопротивление",
-    description:
-      "Разбираем, что может происходить во взаимодействии родителей и взрослых детей, когда забота постепенно превращается в контроль.",
-    type: "video",
-    category: "Отношения",
-    icon: "tabler:users",
-    to: "/materials/videos/control-and-resistance",
-    meta: "10 минут",
-  },
-];
+const materials: Material[] = [];
 
 const activeFilter = ref<(typeof filters)[number]["value"]>("all");
 
